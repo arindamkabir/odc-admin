@@ -3,7 +3,7 @@ import Input from '@/components/common/form/Input'
 import InputError from '@/components/common/form/InputError'
 import Label from '@/components/common/form/Label'
 import Toggle from '@/components/common/form/Toggle'
-import GuestLayout from '@/components/common/layouts/GuestLayout'
+import GuestLayout from '@/components/layouts/GuestLayout'
 import { LoginRequest, useLogin } from '@/hooks/mutations/useLogin'
 import axios from '@/lib/axios'
 import { useForm, SubmitHandler } from "react-hook-form"

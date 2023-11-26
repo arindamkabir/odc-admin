@@ -1,8 +1,4 @@
-import { useState, useEffect } from "react"
-import { Poppins } from "next/font/google";
-import DashboardSidebar from "../navigation/DashboardSidebar";
 import { useAuth } from "@/hooks/useAuth";
-// import PageLoader from "./PageLoader";
 
 type GuestLayoutProps = {
     children: React.ReactNode
