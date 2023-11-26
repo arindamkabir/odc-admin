@@ -21,7 +21,7 @@ const register = async (data: IRegisterRequest) => {
 export const useRegister = (setError: UseFormSetError<IRegisterRequest>) => {
     const router = useRouter();
 
-    return useMutation<any, AxiosError<IErrorResponse>, IRegisterRequest>({
+    return useMutation<any, AxiosError<ErrorResponse>, IRegisterRequest>({
         mutationFn: register,
         onSuccess: (res) => {
             router.push('dashboard');

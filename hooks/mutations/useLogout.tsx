@@ -12,7 +12,7 @@ const logout = async () => {
 export const useLogout = () => {
     const router = useRouter();
 
-    return useMutation<any, AxiosError<IErrorResponse>>({
+    return useMutation<any, AxiosError<ErrorResponse>>({
         mutationFn: logout,
         onSuccess: (res) => {
             router.push('/login');
