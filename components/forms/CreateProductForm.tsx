@@ -1,19 +1,25 @@
 import React from 'react'
 import Label from '../common/form/Label';
 import Input from '../common/form/Input';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { StoreProductRequest } from '@/hooks/mutations/useStoreProduct';
 import InputError from '../common/form/InputError';
 import SearchableSelect from '../common/form/SearchableSelect';
 import PrimaryButton from '../common/buttons/PrimaryButton';
 import { PlusIcon } from '@heroicons/react/24/solid';
 import useProductStore from '@/store/productStore';
+import CategorySelect from '../products/CategorySelect';
+import { Category } from '@/types/Category';
+
+type StoreProductFormState = Omit<StoreProductRequest, 'category_id'> & { category: Category | null }
 
 const CreateProductForm = () => {
     const showingCreateCategoryDrawer = useProductStore(state => state.showingCreateCategoryDrawer);
     const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
 
-    const { register, handleSubmit, watch, formState: { errors }, setValue, setError } = useForm<StoreProductRequest>({
+
+
+    const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreProductFormState>({
         // defaultValues: {
         //     name: '',
         //     category_id: '',
@@ -21,7 +27,7 @@ const CreateProductForm = () => {
         // }
     });
 
-    const storeProduct: SubmitHandler<StoreProductRequest> = async (data) => {
+    const storeProduct: SubmitHandler<StoreProductFormState> = async (data) => {
         console.log(data);
         // mutate(data);
     }
@@ -43,27 +49,27 @@ const CreateProductForm = () => {
 
                 <div className='space-y-1'>
                     <Label>Category</Label>
-                    <SearchableSelect
-                        placeholder='Select Category'
-                        options={categoryOptions}
-                        handleChange={(item) => setValue("category_id", item?.value ?? '')}
-                        footer={
-                            <button
-                                type='button'
-                                onClick={() => { setShowingCreateCategoryDrawer(true); }}
-                                className='w-full flex items-center justify-center space-x-1 py-2 hover:bg-primary mb-2 rounded-md'>
-                                <PlusIcon className='h-4 w-4' />
-                                <span>Add Category</span>
-                            </button>
-                        }
+                    <Controller
+                        control={control}
+                        defaultValue={null}
+                        name="category"
+                        rules={{ required: { value: true, message: "Category is required." } }}
+                        render={({ field }) => (
+                            <CategorySelect
+                                value={field.value}
+                                onChange={field.onChange}
+                                disabled={field.disabled}
+                            />
+                        )}
                     />
-                    {errors.category_id && <InputError message={errors.category_id.message} />}
+
+                    {errors.category && <InputError message={errors.category.message} />}
                 </div>
 
 
             </div>
 
-            <PrimaryButton type="submit" isLoading={isCreating}>
+            <PrimaryButton type="submit" >
                 Save
             </PrimaryButton>
         </form>

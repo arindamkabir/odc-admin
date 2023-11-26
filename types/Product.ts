@@ -1,3 +1,5 @@
+import { Category } from "./Category";
+
 export interface Product {
     id: number;
     name: string;
@@ -11,16 +13,7 @@ export interface Product {
     created_at: string;
     updated_at: string;
     stocks: any[]; // Adjust type as per the stocks structure
-    category: {
-        id: number;
-        name: string;
-        slug: string;
-        parent_id: number;
-        is_featured: number;
-        is_hidden: number;
-        created_at: string;
-        updated_at: string | null;
-    };
+    category: Category;
     primary_image: {
         id: number;
         url: string;
