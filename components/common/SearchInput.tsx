@@ -1,12 +1,22 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 
-const SearchInput = () => {
+type SearchInputProps = {
+    value: string,
+    onChange: (value: string) => void
+}
+
+const SearchInput = ({ value, onChange }: SearchInputProps) => {
     return (
         <div className="join">
             <div>
                 <div>
-                    <input className="input input-bordered join-item min-w-[20rem]" placeholder="Search" />
+                    <input
+                        className="input input-bordered join-item min-w-[20rem]"
+                        placeholder="Search"
+                        value={value}
+                        onChange={(e) => onChange(e.target.value)}
+                    />
                 </div>
             </div>
             <div className="">
