@@ -2,7 +2,7 @@ import React from 'react'
 import Label from '../common/form/Label';
 import Input from '../common/form/Input';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { StoreProductRequest, useStoreProduct } from '@/hooks/mutations/useStoreProduct';
+import { StoreProductRequest, useStoreProduct } from '@/hooks/mutations/product/useStoreProduct';
 import InputError from '../common/form/InputError';
 import SearchableSelect from '../common/form/SearchableSelect';
 import PrimaryButton from '../common/buttons/PrimaryButton';

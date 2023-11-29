@@ -4,7 +4,7 @@ import Pagination from '@/components/common/pagination/Pagination';
 import CreateCategoryDrawer from '@/components/drawers/CreateCategoryDrawer';
 import CreateProductDrawer from '@/components/drawers/CreateProductDrawer';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
-import { useGetProductList } from '@/hooks/queries/useGetProductList'
+import { useGetProductList } from '@/hooks/queries/product/useGetProductList'
 import useProductStore from '@/store/productStore';
 import React from 'react'
 

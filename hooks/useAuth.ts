@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
-import { useLogout } from "./mutations/useLogout";
+import { useLogout } from "./mutations/auth/useLogout";
 
 
 const fetchUser = async () => {

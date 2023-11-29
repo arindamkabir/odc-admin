@@ -3,7 +3,7 @@ import { AsyncPaginate, wrapMenuList } from 'react-select-async-paginate';
 import { components, ActionMeta, MenuListProps, SingleValue, StylesConfig, GroupBase } from 'react-select';
 import { Category } from '@/types/Category';
 import axios from '@/lib/axios';
-import { CategoryListResponse } from '@/hooks/queries/useGetCategoryList';
+import { CategoryListResponse } from '@/hooks/queries/category/useGetCategoryList';
 import clsx from 'clsx';
 import PrimaryButton from '../common/buttons/PrimaryButton';
 import { PlusIcon } from '@heroicons/react/24/solid';

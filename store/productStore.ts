@@ -1,4 +1,4 @@
-import { ProductListRequest } from '@/hooks/queries/useGetProductList';
+import { ProductListRequest } from '@/hooks/queries/product/useGetProductList';
 import { Product } from '@/types/Product';
 import { create } from 'zustand';
 
