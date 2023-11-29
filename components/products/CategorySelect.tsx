@@ -57,7 +57,7 @@ const CategorySelect = ({ showAddButton = false, ...props }: IProps) => {
             search: searchQuery,
         }
 
-        const response = await axios.get<CategoryListResponse>(`/api/categories`, { params });
+        const response = await axios.get<CategoryListResponse>(`/api/admin/categories`, { params });
 
         return {
             options: response.data.data,
