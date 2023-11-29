@@ -3,7 +3,7 @@ import React from 'react'
 type TableProps = {
     containerClassName?: string,
     tableClassName?: string,
-    children: React.ReactElement
+    children: React.ReactElement | React.ReactElement[]
 }
 
 const Table = ({ containerClassName, tableClassName, children }: TableProps) => {
