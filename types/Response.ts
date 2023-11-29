@@ -1,3 +1,9 @@
+export type PaginationLink = {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
 export type PaginatedResponse<T> = {
     current_page: number;
     data: T[];
@@ -5,11 +11,7 @@ export type PaginatedResponse<T> = {
     from: number;
     last_page: number;
     last_page_url: string;
-    links: {
-        url: string | null;
-        label: string;
-        active: boolean;
-    }[];
+    links: PaginationLink[];
     next_page_url: string | null;
     path: string;
     per_page: number;
