@@ -1,3 +1,4 @@
+import { CategoryListRequest } from '@/hooks/queries/category/useGetCategoryList';
 import { ProductListRequest } from '@/hooks/queries/product/useGetProductList';
 import { Product } from '@/types/Product';
 import { create } from 'zustand';
@@ -8,9 +9,11 @@ interface ProductState {
     showingCreateColorDrawer: boolean,
     showingCreateSizeDrawer: boolean,
     productListQueryParams: ProductListRequest,
+    categoryListQueryParams: CategoryListRequest,
     setShowingCreateProductDrawer: (value: boolean) => void,
     setShowingCreateCategoryDrawer: (value: boolean) => void,
     setProductListQueryParams: (params: ProductListRequest) => void,
+    setCategoryListQueryParams: (params: CategoryListRequest) => void,
 }
 
 const useProductStore = create<ProductState>()((set, get) => ({
@@ -22,6 +25,10 @@ const useProductStore = create<ProductState>()((set, get) => ({
         page: 1,
         search: ''
     },
+    categoryListQueryParams: {
+        page: 1,
+        search: ''
+    },
     setShowingCreateProductDrawer: (val) => {
         set(state => ({ showingCreateProductDrawer: val }));
     },
@@ -30,6 +37,9 @@ const useProductStore = create<ProductState>()((set, get) => ({
     },
     setProductListQueryParams: (val) => {
         set(state => ({ productListQueryParams: val }));
+    },
+    setCategoryListQueryParams: (val) => {
+        set(state => ({ categoryListQueryParams: val }));
     }
 }))
 
