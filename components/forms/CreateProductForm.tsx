@@ -2,7 +2,7 @@ import React from 'react'
 import Label from '../common/form/Label';
 import Input from '../common/form/Input';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { StoreProductRequest } from '@/hooks/mutations/useStoreProduct';
+import { StoreProductRequest, useStoreProduct } from '@/hooks/mutations/useStoreProduct';
 import InputError from '../common/form/InputError';
 import SearchableSelect from '../common/form/SearchableSelect';
 import PrimaryButton from '../common/buttons/PrimaryButton';
@@ -12,14 +12,15 @@ import CategorySelect from '../products/CategorySelect';
 import { Category } from '@/types/Category';
 import TextArea from '../common/form/TextArea';
 import Toggle from '../common/form/Toggle';
+import FileInput from '../common/form/FileInput';
 
-type StoreProductFormState = Omit<StoreProductRequest, 'category_id'> & { category: Category | null }
 
 const CreateProductForm = () => {
     const showingCreateCategoryDrawer = useProductStore(state => state.showingCreateCategoryDrawer);
     const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
+    const setShowingCreateProductDrawer = useProductStore(state => state.setShowingCreateProductDrawer);
 
-    const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreProductFormState>({
+    const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreProductRequest>({
         // defaultValues: {
         //     name: '',
         //     category_id: '',
@@ -27,9 +28,11 @@ const CreateProductForm = () => {
         // }
     });
 
-    const storeProduct: SubmitHandler<StoreProductFormState> = async (data) => {
+    const { mutate, isPending } = useStoreProduct(setError, () => { setShowingCreateProductDrawer(false) });
+
+    const storeProduct: SubmitHandler<StoreProductRequest> = async (data) => {
         console.log(data);
-        // mutate(data);
+        mutate(data);
     }
 
     return (
@@ -54,6 +57,15 @@ const CreateProductForm = () => {
                         {...register('SKU', { required: { value: true, message: "SKU is required." } })}
                     />
                     {errors.SKU && <InputError message={errors.SKU.message} />}
+                </div>
+
+                <div className='space-y-1'>
+                    <Label>Price</Label>
+                    <Input
+                        type="text"
+                        {...register('price', { required: { value: true, message: "Price is required." } })}
+                    />
+                    {errors.price && <InputError message={errors.price.message} />}
                 </div>
 
                 <div className='space-y-1'>
@@ -85,6 +97,11 @@ const CreateProductForm = () => {
                 </div>
 
                 {/* Images */}
+                <div className='space-y-1'>
+                    <Label>Primary Image</Label>
+                    <FileInput {...register('primary_img', { required: { value: true, message: "Description is required." } })} />
+                </div>
+
                 <div className='space-y-1'>
                     <Label>Feature Product?</Label>
                     <Controller
@@ -121,7 +138,7 @@ const CreateProductForm = () => {
 
             </div>
 
-            <PrimaryButton type="submit" >
+            <PrimaryButton type="submit" isLoading={isPending}>
                 Save
             </PrimaryButton>
         </form>

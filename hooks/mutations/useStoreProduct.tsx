@@ -4,21 +4,45 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { UseFormSetError } from "react-hook-form";
 import { ErrorResponse } from "@/types/Error"
+import { Category } from "@/types/Category";
 
 export type StoreProductRequest = {
     name: string,
-    category_id: string,
-    description: string,
+    category: Category | null,
+    price: string,
+    description?: string,
     SKU: string,
-    primary_img: Blob,
-    secondary_img: Blob,
+    primary_img: FileList,
+    secondary_img?: Blob,
     is_featured: boolean,
     is_hidden: boolean,
 }
 
 const storeProduct = async (data: StoreProductRequest) => {
-    const response = await axios.post('/api/products/', data);
-    console.log(response);
+    if (!data.category) return;
+
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('price', data.price);
+    formData.append('category_id', data.category.id.toString());
+    formData.append('description', data.description ?? '');
+    formData.append('SKU', data.SKU);
+    formData.append('primary_img', data.primary_img[0]);
+    formData.append('is_featured', data.is_featured ? 'true' : 'false');
+    formData.append('is_hidden', data.is_hidden ? 'true' : 'false');
+
+    const response = await axios.post('/api/admin/products/', formData);
+
+    // const response = await axios.post('/api/admin/products/', {
+    //     name: data.name,
+    //     price: data.price,
+    //     category_id: data.category.id,
+    //     description: data.description,
+    //     SKU: data.SKU,
+    //     primary_img: data.primary_img[0],
+    //     is_featured: data.is_featured ? 'true' : false,
+    //     is_hidden: data.is_hidden ? 'true' : false
+    // });
     return response;
 }
 
