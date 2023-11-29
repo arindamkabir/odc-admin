@@ -7,7 +7,7 @@ import { useLogout } from "./mutations/useLogout";
 
 
 const fetchUser = async () => {
-    const response = await axios.get('/api/user');
+    const response = await axios.get('/api/admin/user');
     console.log(response)
     return response.data;
 }
