@@ -1,25 +1,21 @@
+import useProductStore from '@/store/productStore';
 import React from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import Label from '../common/form/Label';
 import Input from '../common/form/Input';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { StoreProductRequest } from '@/hooks/mutations/useStoreProduct';
-import InputError from '../common/form/InputError';
-import SearchableSelect from '../common/form/SearchableSelect';
-import PrimaryButton from '../common/buttons/PrimaryButton';
-import { PlusIcon } from '@heroicons/react/24/solid';
-import useProductStore from '@/store/productStore';
-import CategorySelect from '../products/CategorySelect';
+import { StoreCategoryRequest, useStoreCategory } from '@/hooks/mutations/useStoreCategory';
 import { Category } from '@/types/Category';
-import TextArea from '../common/form/TextArea';
+import InputError from '../common/form/InputError';
+import CategorySelect from '../products/CategorySelect';
 import Toggle from '../common/form/Toggle';
+import PrimaryButton from '../common/buttons/PrimaryButton';
 
-type StoreProductFormState = Omit<StoreProductRequest, 'category_id'> & { category: Category | null }
 
-const CreateProductForm = () => {
+const CreateCategoryForm = () => {
     const showingCreateCategoryDrawer = useProductStore(state => state.showingCreateCategoryDrawer);
     const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
 
-    const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreProductFormState>({
+    const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreCategoryRequest>({
         // defaultValues: {
         //     name: '',
         //     category_id: '',
@@ -27,15 +23,17 @@ const CreateProductForm = () => {
         // }
     });
 
-    const storeProduct: SubmitHandler<StoreProductFormState> = async (data) => {
+    const { mutate, isPending } = useStoreCategory(setError, () => { setShowingCreateCategoryDrawer(false) });
+
+    const storeCategory: SubmitHandler<StoreCategoryRequest> = async (data) => {
         console.log(data);
-        // mutate(data);
+        mutate(data);
     }
 
     return (
         <form
             className="w-full flex flex-col h-full justify-between"
-            onSubmit={handleSubmit(storeProduct)}
+            onSubmit={handleSubmit(storeCategory)}
         >
             <div className='space-y-4'>
                 <div className='space-y-1'>
@@ -48,45 +46,25 @@ const CreateProductForm = () => {
                 </div>
 
                 <div className='space-y-1'>
-                    <Label>SKU</Label>
-                    <Input
-                        type="text"
-                        {...register('SKU', { required: { value: true, message: "SKU is required." } })}
-                    />
-                    {errors.SKU && <InputError message={errors.SKU.message} />}
-                </div>
-
-                <div className='space-y-1'>
                     <Label>Category</Label>
                     <Controller
                         control={control}
                         defaultValue={null}
-                        name="category"
-                        rules={{ required: { value: true, message: "Category is required." } }}
+                        name="parent"
+                        // rules={{ required: { value: false, message: "Category is required." } }}
                         render={({ field }) => (
                             <CategorySelect
                                 value={field.value}
                                 onChange={field.onChange}
                                 disabled={field.disabled}
-                                showAddButton={true}
                             />
                         )}
                     />
-                    {errors.category && <InputError message={errors.category.message} />}
+                    {errors.parent && <InputError message={errors.parent.message} />}
                 </div>
 
                 <div className='space-y-1'>
-                    <Label>Description</Label>
-                    <TextArea
-                        rows={5}
-                        {...register('description', { required: { value: true, message: "Description is required." } })}
-                    />
-                    {errors.description && <InputError message={errors.description.message} />}
-                </div>
-
-                {/* Images */}
-                <div className='space-y-1'>
-                    <Label>Feature Product?</Label>
+                    <Label>Feature Category?</Label>
                     <Controller
                         control={control}
                         defaultValue={false}
@@ -103,7 +81,7 @@ const CreateProductForm = () => {
                 </div>
 
                 <div className='space-y-1'>
-                    <Label>Hide Product?</Label>
+                    <Label>Hide Category?</Label>
                     <Controller
                         control={control}
                         defaultValue={false}
@@ -121,11 +99,14 @@ const CreateProductForm = () => {
 
             </div>
 
-            <PrimaryButton type="submit" >
+            <PrimaryButton
+                type="submit"
+                isLoading={isPending}
+            >
                 Save
             </PrimaryButton>
         </form>
     )
 }
 
-export default CreateProductForm
+export default CreateCategoryForm

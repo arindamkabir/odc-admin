@@ -1,5 +1,6 @@
 import SearchInput from '@/components/common/SearchInput';
 import PrimaryButton from '@/components/common/buttons/PrimaryButton';
+import CreateCategoryDrawer from '@/components/drawers/CreateCategoryDrawer';
 import CreateProductDrawer from '@/components/drawers/CreateProductDrawer';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import { useGetProductList } from '@/hooks/queries/useGetProductList'
@@ -82,6 +83,7 @@ const ProductHomePage = () => {
             </div>
 
             <CreateProductDrawer />
+            <CreateCategoryDrawer />
         </DashboardLayout>
     )
 }

@@ -5,27 +5,37 @@ import { Category } from '@/types/Category';
 import axios from '@/lib/axios';
 import { CategoryListResponse } from '@/hooks/queries/useGetCategoryList';
 import clsx from 'clsx';
+import PrimaryButton from '../common/buttons/PrimaryButton';
+import { PlusIcon } from '@heroicons/react/24/solid';
+import useProductStore from '@/store/productStore';
 
 type IProps = {
     value?: SingleValue<Category>,
     onChange: (newValue: SingleValue<Category>, actionMeta: ActionMeta<Category>) => void;
     disabled?: boolean;
+    showAddButton?: boolean;
 }
 
 const MenuList: (props: MenuListProps<Category, false, GroupBase<Category>>) => React.ReactElement = (props) => {
+    const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
+
     return (
         <components.MenuList  {...props}>
             {props.children}
-            <div>
-
-            </div>
+            <button
+                type="button"
+                className='btn btn-ghost text-sm !py-1 flex text-center !w-full'
+                onClick={() => setShowingCreateCategoryDrawer(true)}
+            >
+                <span><PlusIcon className='h-5 w-5' /></span> Add Category
+            </button>
         </components.MenuList >
     )
 };
 
 const wrappedMenuList = wrapMenuList<Category, false, GroupBase<Category>>(MenuList);
 
-const CategorySelect = (props: IProps) => {
+const CategorySelect = ({ showAddButton = false, ...props }: IProps) => {
     const [cacheUniq, setCacheUniq] = useState<number>(0);
 
     const sleep = (ms: number) =>
@@ -58,6 +68,7 @@ const CategorySelect = (props: IProps) => {
         };
     };
 
+
     return (
         <AsyncPaginate
             debounceTimeout={300}
@@ -85,7 +96,7 @@ const CategorySelect = (props: IProps) => {
             onInputChange={() => setCacheUniq((val) => val + 1)}
             isDisabled={props.disabled}
             isMulti={false}
-            components={{ MenuList: wrappedMenuList }}
+            components={showAddButton ? { MenuList: wrappedMenuList } : {}}
         />
     );
 };
