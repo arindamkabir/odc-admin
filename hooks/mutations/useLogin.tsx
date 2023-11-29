@@ -10,7 +10,7 @@ export type LoginRequest = {
 
 const login = async (data: LoginRequest) => {
     await axios.get('/sanctum/csrf-cookie');
-    const response = await axios.post('/login', { email: data.email, password: data.password, remember: data.shouldRemember });
+    const response = await axios.post('/admin/login', { email: data.email, password: data.password, remember: data.shouldRemember });
     return response;
 }
 

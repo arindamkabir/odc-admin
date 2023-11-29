@@ -6,7 +6,7 @@ import { QueryClient, useQuery } from "@tanstack/react-query";
 export type CategoryListResponse = PaginatedResponse<Category>;
 
 const fetchCategoryList = async (): Promise<CategoryListResponse> => {
-    const response = await axios.get<CategoryListResponse>(`/api/categories`);
+    const response = await axios.get<CategoryListResponse>(`/api/admin/categories`);
     return response.data;
 };
 

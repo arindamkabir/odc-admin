@@ -3,18 +3,23 @@ import { Product } from "@/types/Product";
 import { PaginatedResponse } from "@/types/Response";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 
+export type ProductListRequest = {
+    search: string,
+    page: number,
+}
+
 export type ProductListResponse = PaginatedResponse<Product>;
 
-const fetchProductList = async (): Promise<ProductListResponse> => {
-    const response = await axios.get<ProductListResponse>(`/api/products`);
+const fetchProductList = async (params: ProductListRequest): Promise<ProductListResponse> => {
+    const response = await axios.get<ProductListResponse>(`/api/admin/products`, { params: params });
     return response.data;
 };
 
-export const useGetProductList = () => {
+export const useGetProductList = (params: ProductListRequest) => {
     return useQuery<ProductListResponse, Error>({
-        queryKey: ['products'],
+        queryKey: ['products', params],
         queryFn: () => {
-            return fetchProductList();
+            return fetchProductList(params);
         }
     });
 };
