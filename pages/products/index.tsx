@@ -4,6 +4,7 @@ import Pagination from '@/components/common/pagination/Pagination';
 import CreateCategoryDrawer from '@/components/drawers/CreateCategoryDrawer';
 import CreateProductDrawer from '@/components/drawers/CreateProductDrawer';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
+import ProductsTable from '@/components/tables/ProductsTable';
 import { useGetProductList } from '@/hooks/queries/product/useGetProductList'
 import useProductStore from '@/store/productStore';
 import React from 'react'
@@ -14,8 +15,6 @@ const ProductHomePage = () => {
     const setProductListQueryParams = useProductStore(state => state.setProductListQueryParams);
 
     const { data: productListResponse, isLoading } = useGetProductList(productListQueryParams);
-
-    console.log(productListResponse)
 
     return (
         <DashboardLayout>
@@ -62,80 +61,7 @@ const ProductHomePage = () => {
                 </PrimaryButton>
             </div>
 
-            <div className="overflow-auto">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
-                            <th>Image</th>
-                            <th>SKU</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            productListResponse?.data.map(product =>
-                                <tr key={`product-table-${product.slug}`}>
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
-                                    <td><img src={product.primary_image.full_url} alt={product.name} className='w-32' /></td>
-                                    <td>{product.SKU}</td>
-                                    <td>{product.name}</td>
-                                    <td>{product.category.name}</td>
-                                    <td>{product.price}</td>
-                                    <td>0</td>
-                                    <td>
-                                        <button className="btn btn-ghost btn-xs">details</button>
-                                    </td>
-                                </tr>
-                            )}
-
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th>Image</th>
-                            <th>SKU</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-
-                </table>
-            </div>
-
-
-            <>
-                {
-                    productListResponse?.data ?
-                        <Pagination
-                            page={productListResponse?.current_page}
-                            pageLinks={productListResponse?.links}
-                            lastPage={productListResponse?.last_page}
-                            prevPageUrl={productListResponse?.prev_page_url}
-                            nextPageUrl={productListResponse?.next_page_url}
-                            onChange={(page) => setProductListQueryParams({ ...productListQueryParams, page: page })}
-                        />
-                        :
-                        <></>
-                }
-            </>
-
-
+            <ProductsTable />
 
             <CreateProductDrawer />
             <CreateCategoryDrawer />
