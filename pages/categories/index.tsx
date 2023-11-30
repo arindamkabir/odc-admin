@@ -2,16 +2,16 @@ import React from 'react';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import CategoriesTable from '@/components/tables/CategoriesTable';
 import SearchInput from '@/components/common/SearchInput';
-import useProductStore from '@/store/productStore';
+import useStore from '@/store/store';
 import PrimaryButton from '@/components/common/buttons/PrimaryButton';
 import Head from 'next/head';
 import CreateCategoryDrawer from '@/components/drawers/CreateCategoryDrawer';
 import SEO from '@/components/common/SEO';
 
 const CategoryIndexPage = () => {
-    const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
-    const categoryListQueryParams = useProductStore(state => state.categoryListQueryParams);
-    const setCategoryListQueryParams = useProductStore(state => state.setCategoryListQueryParams);
+    const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
+    const categoryListQueryParams = useStore(state => state.categoryListQueryParams);
+    const setCategoryListQueryParams = useStore(state => state.setCategoryListQueryParams);
 
     return (
         <DashboardLayout header='Category Index'>

@@ -7,7 +7,7 @@ import InputError from '../common/form/InputError';
 import SearchableSelect from '../common/form/SearchableSelect';
 import PrimaryButton from '../common/buttons/PrimaryButton';
 import { PlusIcon } from '@heroicons/react/24/solid';
-import useProductStore from '@/store/productStore';
+import useStore from '@/store/store';
 import CategorySelect from '../products/CategorySelect';
 import { Category } from '@/types/Category';
 import TextArea from '../common/form/TextArea';
@@ -16,9 +16,9 @@ import FileInput from '../common/form/FileInput';
 
 
 const CreateProductForm = () => {
-    const showingCreateCategoryDrawer = useProductStore(state => state.showingCreateCategoryDrawer);
-    const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
-    const setShowingCreateProductDrawer = useProductStore(state => state.setShowingCreateProductDrawer);
+    const showingCreateCategoryDrawer = useStore(state => state.showingCreateCategoryDrawer);
+    const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
+    const setShowingCreateProductDrawer = useStore(state => state.setShowingCreateProductDrawer);
 
     const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreProductRequest>({
         // defaultValues: {

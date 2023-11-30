@@ -6,13 +6,13 @@ import Th from '../common/table/Th'
 import THead from '../common/table/THead'
 import TBody from '../common/table/TBody'
 import Td from '../common/table/Td'
-import useProductStore from '@/store/productStore'
+import useStore from '@/store/store'
 import { useGetProductList } from '@/hooks/queries/product/useGetProductList'
 import Pagination from '../common/pagination/Pagination'
 
 const ProductsTable = () => {
-    const productListQueryParams = useProductStore(state => state.productListQueryParams);
-    const setProductListQueryParams = useProductStore(state => state.setProductListQueryParams);
+    const productListQueryParams = useStore(state => state.productListQueryParams);
+    const setProductListQueryParams = useStore(state => state.setProductListQueryParams);
 
     const { data: productListResponse, isPending } = useGetProductList(productListQueryParams);
 

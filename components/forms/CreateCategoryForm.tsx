@@ -1,4 +1,4 @@
-import useProductStore from '@/store/productStore';
+import useStore from '@/store/store';
 import React from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import Label from '../common/form/Label';
@@ -12,8 +12,8 @@ import PrimaryButton from '../common/buttons/PrimaryButton';
 
 
 const CreateCategoryForm = () => {
-    const showingCreateCategoryDrawer = useProductStore(state => state.showingCreateCategoryDrawer);
-    const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
+    const showingCreateCategoryDrawer = useStore(state => state.showingCreateCategoryDrawer);
+    const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
 
     const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreCategoryRequest>({
         // defaultValues: {

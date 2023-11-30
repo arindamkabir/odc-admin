@@ -6,7 +6,7 @@ import Th from '../common/table/Th'
 import THead from '../common/table/THead'
 import TBody from '../common/table/TBody'
 import Td from '../common/table/Td'
-import useProductStore from '@/store/productStore'
+import useStore from '@/store/store'
 import { useGetProductList } from '@/hooks/queries/product/useGetProductList'
 import Pagination from '../common/pagination/Pagination'
 import { useGetCategoryList } from '@/hooks/queries/category/useGetCategoryList'
@@ -14,8 +14,8 @@ import { formatISO } from 'date-fns'
 import { formatISOString } from '@/utils/dateTime'
 
 const CategoriesTable = () => {
-    const categoryListQueryParams = useProductStore(state => state.categoryListQueryParams);
-    const setCategoryListQueryParams = useProductStore(state => state.setCategoryListQueryParams);
+    const categoryListQueryParams = useStore(state => state.categoryListQueryParams);
+    const setCategoryListQueryParams = useStore(state => state.setCategoryListQueryParams);
 
     const { data: categoryListResponse, isPending } = useGetCategoryList(categoryListQueryParams);
 

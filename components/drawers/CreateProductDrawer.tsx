@@ -1,11 +1,11 @@
 import React from 'react'
 import Drawer from '../common/Drawer'
 import CreateProductForm from '../forms/CreateProductForm'
-import useProductStore from '@/store/productStore'
+import useStore from '@/store/store'
 
 const CreateProductDrawer = () => {
-    const showingCreateProductDrawer = useProductStore(state => state.showingCreateProductDrawer);
-    const setShowingCreateProductDrawer = useProductStore(state => state.setShowingCreateProductDrawer);
+    const showingCreateProductDrawer = useStore(state => state.showingCreateProductDrawer);
+    const setShowingCreateProductDrawer = useStore(state => state.setShowingCreateProductDrawer);
 
     return (
         <Drawer

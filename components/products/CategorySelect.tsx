@@ -7,7 +7,7 @@ import { CategoryListResponse } from '@/hooks/queries/category/useGetCategoryLis
 import clsx from 'clsx';
 import PrimaryButton from '../common/buttons/PrimaryButton';
 import { PlusIcon } from '@heroicons/react/24/solid';
-import useProductStore from '@/store/productStore';
+import useStore from '@/store/store';
 
 type IProps = {
     value?: SingleValue<Category>,
@@ -17,7 +17,7 @@ type IProps = {
 }
 
 const MenuList: (props: MenuListProps<Category, false, GroupBase<Category>>) => React.ReactElement = (props) => {
-    const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
+    const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
 
     return (
         <components.MenuList  {...props}>

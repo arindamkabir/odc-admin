@@ -1,11 +1,11 @@
 import React from 'react'
 import Drawer from '../common/Drawer';
-import useProductStore from '@/store/productStore';
+import useStore from '@/store/store';
 import CreateCategoryForm from '../forms/CreateCategoryForm';
 
 const CreateCategoryDrawer = () => {
-    const showingCreateCategoryDrawer = useProductStore(state => state.showingCreateCategoryDrawer);
-    const setShowingCreateCategoryDrawer = useProductStore(state => state.setShowingCreateCategoryDrawer);
+    const showingCreateCategoryDrawer = useStore(state => state.showingCreateCategoryDrawer);
+    const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
 
     return (
         <Drawer

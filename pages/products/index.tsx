@@ -6,13 +6,13 @@ import CreateProductDrawer from '@/components/drawers/CreateProductDrawer';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import ProductsTable from '@/components/tables/ProductsTable';
 import { useGetProductList } from '@/hooks/queries/product/useGetProductList'
-import useProductStore from '@/store/productStore';
+import useStore from '@/store/store';
 import React from 'react'
 
 const ProductHomePage = () => {
-    const setShowingCreateProductDrawer = useProductStore(state => state.setShowingCreateProductDrawer);
-    const productListQueryParams = useProductStore(state => state.productListQueryParams);
-    const setProductListQueryParams = useProductStore(state => state.setProductListQueryParams);
+    const setShowingCreateProductDrawer = useStore(state => state.setShowingCreateProductDrawer);
+    const productListQueryParams = useStore(state => state.productListQueryParams);
+    const setProductListQueryParams = useStore(state => state.setProductListQueryParams);
 
     const { data: productListResponse, isLoading } = useGetProductList(productListQueryParams);
 
