@@ -58,7 +58,7 @@ const DashboardLayout = ({ header, children }: DashboardLayoutProps) => {
                                 <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                                     <div className="px-4">
                                         <div className="text-base font-medium text-gray-800 dark:text-gray-200">
-                                            Arindam Kabir
+                                            {user.name}
                                         </div>
                                         <div className="text-sm font-medium text-gray-500">arindamkabir@gmail.com</div>
                                     </div>
@@ -83,10 +83,10 @@ const DashboardLayout = ({ header, children }: DashboardLayoutProps) => {
                                     <div>
                                         <div className="px-2 py-6 sm:px-2 md:px-6 lg:px-12 xl:px-20">
                                             <div className="flex items-center justify-between">
-                                                <h3 className="text-lg font-medium tracking-widest text-gray-600 uppercase">
+                                                <h3 className="text-lg font-medium tracking-widest uppercase">
                                                     {header && (
                                                         <header className="">
-                                                            <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+                                                            <h2 className="text-xl font-semibold leading-tight">
                                                                 {header}
                                                             </h2>
                                                         </header>
