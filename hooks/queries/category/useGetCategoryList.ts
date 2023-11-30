@@ -1,5 +1,5 @@
 import axios from "@/lib/axios";
-import { Category } from "@/types/Category";
+import { Category, CategoryWithParentAndProductCount } from "@/types/Category";
 import { PaginatedResponse } from "@/types/Response";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 
@@ -8,7 +8,7 @@ export type CategoryListRequest = {
     page: number,
 }
 
-export type CategoryListResponse = PaginatedResponse<Category>;
+export type CategoryListResponse = PaginatedResponse<CategoryWithParentAndProductCount>;
 
 const fetchCategoryList = async (params: CategoryListRequest): Promise<CategoryListResponse> => {
     const response = await axios.get<CategoryListResponse>(`/api/admin/categories`);
