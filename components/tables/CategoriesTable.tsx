@@ -49,8 +49,9 @@ const CategoriesTable = () => {
                                 <Td>{category.parent?.name ?? '-'}</Td>
                                 <Td>{category.products_count}</Td>
                                 <Td>{category?.updated_at ? formatISOString(category.updated_at, "PP") : '-'}</Td>
-                                <Td>
+                                <Td className='flex items-center space-x-3'>
                                     <button className="btn btn-ghost btn-xs">details</button>
+                                    <button className="btn btn-ghost btn-xs">edit</button>
                                 </Td>
                             </Tr>
                         )}
