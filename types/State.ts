@@ -1,5 +1,6 @@
 import { CategoryListRequest } from "@/hooks/queries/category/useGetCategoryList";
 import { ProductListRequest } from "@/hooks/queries/product/useGetProductList";
+import { CategoryWithParentAndProductCount } from "./Category";
 
 export type ProductState = {
     showingCreateProductDrawer: boolean,
@@ -11,6 +12,7 @@ export type ProductState = {
 export type CategoryState = {
     showingCreateCategoryDrawer: boolean,
     categoryListQueryParams: CategoryListRequest,
+    editingCategory: CategoryWithParentAndProductCount | null,
     setCategoryListQueryParams: (params: CategoryListRequest) => void,
     setShowingCreateCategoryDrawer: (value: boolean) => void,
 }
