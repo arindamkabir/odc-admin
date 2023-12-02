@@ -5,7 +5,7 @@ import SearchInput from '@/components/common/SearchInput';
 import useStore from '@/store/store';
 import PrimaryButton from '@/components/common/buttons/PrimaryButton';
 import Head from 'next/head';
-import CreateCategoryDrawer from '@/components/drawers/CreateCategoryDrawer';
+import CreateCategoryDrawer from '@/components/drawers/category/CreateCategoryDrawer';
 import SEO from '@/components/common/SEO';
 
 const CategoryIndexPage = () => {
