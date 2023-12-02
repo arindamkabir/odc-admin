@@ -16,6 +16,8 @@ import { formatISOString } from '@/utils/dateTime'
 const CategoriesTable = () => {
     const categoryListQueryParams = useStore(state => state.categoryListQueryParams);
     const setCategoryListQueryParams = useStore(state => state.setCategoryListQueryParams);
+    const setShowingEditCategoryDrawer = useStore(state => state.setShowingEditCategoryDrawer);
+    const setEditingCategory = useStore(state => state.setEditingCategory);
 
     const { data: categoryListResponse, isPending } = useGetCategoryList(categoryListQueryParams);
 
@@ -51,11 +53,25 @@ const CategoriesTable = () => {
                                 <Td>{category?.updated_at ? formatISOString(category.updated_at, "PP") : '-'}</Td>
                                 <Td className='flex items-center space-x-3'>
                                     <button className="btn btn-ghost btn-xs">details</button>
-                                    <button className="btn btn-ghost btn-xs">edit</button>
+                                    <button
+                                        className="btn btn-ghost btn-xs"
+                                        onClick={() => {
+                                            setEditingCategory(category);
+                                            setShowingEditCategoryDrawer(true);
+                                        }}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className="btn btn-ghost btn-xs"
+                                        onClick={() => {
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
                                 </Td>
                             </Tr>
                         )}
-
                 </TBody>
                 <TFoot>
                     <Tr>
