@@ -7,18 +7,24 @@ const createSizeSlice: StateCreator<
     [],
     SizeState
 > = (set) => ({
-    showingCreateSizeDrawer: false,
-    showingEditSizeDrawer: false,
     sizeListQueryParams: {
         page: 1,
         search: ''
     },
     editingSize: null,
-    setShowingCreateSizeDrawer: (val) => {
+    showingCreateSizeDrawer: false,
+    showingEditSizeDrawer: false,
+    setEditingSize: (size) => {
+        set(state => ({ editingSize: size }));
+    },
+    showCreateSizeDrawer: (val) => {
         set(state => ({ showingCreateSizeDrawer: val }));
     },
-    setSizeListQueryParams: (val) => {
-        set(state => ({ sizeListQueryParams: val }));
+    showEditSizeDrawer: (val) => {
+        set(state => ({ showingEditSizeDrawer: val }));
+    },
+    setSizeListQueryParams: (params) => {
+        set(state => ({ sizeListQueryParams: params }));
     }
 });
 
