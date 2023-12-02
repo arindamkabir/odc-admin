@@ -1,5 +1,17 @@
 import { Category } from "./Category";
 
+export type Stock = {
+    id: number;
+    product_id: number;
+    size_id: number;
+    color_id: number;
+    quantity: number;
+    price: string;
+    sales_price: string | null;
+    created_at: string;
+    updated_at: string;
+};
+
 export interface Product {
     id: number;
     name: string;
@@ -12,7 +24,7 @@ export interface Product {
     is_featured: boolean;
     created_at: string;
     updated_at: string;
-    stocks: any[]; // Adjust type as per the stocks structure
+    stocks: Stock[]; // Adjust type as per the stocks structure
     category: Category;
     primary_image: {
         id: number;
