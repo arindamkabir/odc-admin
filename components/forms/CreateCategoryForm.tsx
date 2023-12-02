@@ -15,13 +15,7 @@ const CreateCategoryForm = () => {
     const showingCreateCategoryDrawer = useStore(state => state.showingCreateCategoryDrawer);
     const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
 
-    const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreCategoryRequest>({
-        // defaultValues: {
-        //     name: '',
-        //     category_id: '',
-        //     entry_type: 'boolean'
-        // }
-    });
+    const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreCategoryRequest>({});
 
     const { mutate, isPending } = useStoreCategory(setError, () => { setShowingCreateCategoryDrawer(false) });
 
@@ -109,4 +103,4 @@ const CreateCategoryForm = () => {
     )
 }
 
-export default CreateCategoryForm
+export default CreateCategoryForm;

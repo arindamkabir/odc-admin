@@ -76,12 +76,10 @@ const CategoriesTable = () => {
                 <TFoot>
                     <Tr>
                         <Th></Th>
-                        <Th>Image</Th>
-                        <Th>SKU</Th>
                         <Th>Name</Th>
-                        <Th>Category</Th>
-                        <Th>Price</Th>
-                        <Th>Stock</Th>
+                        <Th>Parent</Th>
+                        <Th># of Products</Th>
+                        <Th>Last Updated</Th>
                         <Th></Th>
                     </Tr>
                 </TFoot>

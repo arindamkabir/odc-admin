@@ -7,7 +7,7 @@ import { ErrorResponse } from "@/types/Error"
 import { Category } from "@/types/Category";
 
 export type UpdateCategoryRequest = {
-    id: string,
+    id: number,
     name: string,
     parent?: Category | null,
     is_featured: boolean,
@@ -21,7 +21,6 @@ const updateCategory = async (data: UpdateCategoryRequest) => {
         is_featured: data.is_featured ? 'true' : 'false',
         is_hidden: data.is_hidden ? 'true' : 'false',
     });
-    console.log(response);
     return response;
 }
 

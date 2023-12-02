@@ -7,6 +7,7 @@ import PrimaryButton from '@/components/common/buttons/PrimaryButton';
 import Head from 'next/head';
 import CreateCategoryDrawer from '@/components/drawers/category/CreateCategoryDrawer';
 import SEO from '@/components/common/SEO';
+import EditCategoryDrawer from '@/components/drawers/category/EditCategoryDrawer';
 
 const CategoryIndexPage = () => {
     const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
@@ -31,6 +32,7 @@ const CategoryIndexPage = () => {
             <CategoriesTable />
 
             <CreateCategoryDrawer />
+            <EditCategoryDrawer />
         </DashboardLayout>
     )
 }
