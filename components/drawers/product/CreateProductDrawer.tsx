@@ -1,6 +1,6 @@
 import React from 'react'
-import Drawer from '../common/Drawer'
-import CreateProductForm from '../forms/CreateProductForm'
+import Drawer from '../../common/Drawer'
+import CreateProductForm from '../../forms/CreateProductForm'
 import useStore from '@/store/store'
 
 const CreateProductDrawer = () => {

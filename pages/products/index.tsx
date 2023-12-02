@@ -2,7 +2,7 @@ import SearchInput from '@/components/common/SearchInput';
 import PrimaryButton from '@/components/common/buttons/PrimaryButton';
 import Pagination from '@/components/common/pagination/Pagination';
 import CreateCategoryDrawer from '@/components/drawers/category/CreateCategoryDrawer';
-import CreateProductDrawer from '@/components/drawers/CreateProductDrawer';
+import CreateProductDrawer from '@/components/drawers/product/CreateProductDrawer';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import ProductsTable from '@/components/tables/ProductsTable';
 import { useGetProductList } from '@/hooks/queries/product/useGetProductList'
