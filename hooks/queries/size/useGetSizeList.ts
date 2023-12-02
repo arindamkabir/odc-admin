@@ -12,7 +12,6 @@ export type SizeListResponse = PaginatedResponse<Size>;
 
 const fetchSizeList = async (params: SizeListRequest): Promise<SizeListResponse> => {
     const response = await axios.get<SizeListResponse>(`/api/admin/sizes`, { params: params });
-    console.log(response);
     return response.data;
 };
 
