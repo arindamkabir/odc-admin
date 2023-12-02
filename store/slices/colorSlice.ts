@@ -14,8 +14,14 @@ const createColorSlice: StateCreator<
         search: ''
     },
     editingColor: null,
-    setShowingCreateColorDrawer: (val) => {
+    setEditingColor: (color) => {
+        set(state => ({ editingColor: color }));
+    },
+    showCreateColorDrawer: (val) => {
         set(state => ({ showingCreateColorDrawer: val }));
+    },
+    showEditColorDrawer: (val) => {
+        set(state => ({ showingEditColorDrawer: val }));
     },
     setColorListQueryParams: (val) => {
         set(state => ({ colorListQueryParams: val }));

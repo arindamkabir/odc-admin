@@ -29,17 +29,21 @@ export type ColorState = {
     showingEditColorDrawer: boolean,
     colorListQueryParams: ColorListRequest,
     editingColor: Color | null,
+    setEditingColor: (value: Color | null) => void,
+    showCreateColorDrawer: (value: boolean) => void,
+    showEditColorDrawer: (value: boolean) => void,
     setColorListQueryParams: (params: ColorListRequest) => void,
-    setShowingCreateColorDrawer: (value: boolean) => void,
 };
 
 export type SizeState = {
-    showingCreateSizeDrawer: boolean,
-    showingEditSizeDrawer: boolean,
     sizeListQueryParams: SizeListRequest,
     editingSize: Size | null,
+    showingCreateSizeDrawer: boolean,
+    showingEditSizeDrawer: boolean,
+    setEditingSize: (value: Size | null) => void,
+    showCreateSizeDrawer: (value: boolean) => void,
+    showEditSizeDrawer: (value: boolean) => void,
     setSizeListQueryParams: (params: SizeListRequest) => void,
-    setShowingCreateSizeDrawer: (value: boolean) => void,
 };
 
 export type BoundedState = ProductState & CategoryState & ColorState & SizeState;
