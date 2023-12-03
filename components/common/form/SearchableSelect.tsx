@@ -1,9 +1,9 @@
 import React, { ComponentType } from 'react'
 import ReactSelect, { MenuListProps, SingleValue } from 'react-select';
 import clsx from "clsx";
-import { MenuListComponentProps } from '@/menu';
 import { components, ControlProps, GroupBase, Props } from "react-select";
 import type { } from 'react-select/base';
+import { MenuListComponentProps } from './menu';
 
 declare module 'react-select/base' {
     export interface Props<
