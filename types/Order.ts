@@ -21,6 +21,24 @@ type OrderItemWProduct = {
     updated_at: string;
 }
 
+type Address = {
+    id: number;
+    order_id: number;
+    type: string;
+    f_name: string;
+    l_name: string;
+    email: string;
+    phone: string;
+    line1: string;
+    line2: string | null;
+    city: string;
+    state: string;
+    country: string;
+    zip_code: string;
+    company: string;
+    created_at: string | null;
+    updated_at: string | null;
+}
 
 type Transaction = {
     id: number;
@@ -39,6 +57,7 @@ export type Order = {
     tax: string;
     total: string;
     is_billing_different: number;
+    shipping: Address;
     shipped_date: string | null;
     delivered_date: string | null;
     cancellation_date: string | null;

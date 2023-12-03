@@ -51,14 +51,14 @@ export default function Sidebar() {
                             </div>
                         </SidebarLink>
 
-                        <SidebarLink href="/" active={false}>
+                        <SidebarLink href="/products" active={false}>
                             <div className={(open ? 'pl-5' : 'justify-center') + " flex items-center space-x-5"}>
                                 <ShoppingBagIcon className="w-6 h-6" />
                                 <span className={open ? 'block' : 'hidden'}>Products</span>
                             </div>
                         </SidebarLink>
 
-                        <SidebarLink href="/" active={false}>
+                        <SidebarLink href="/categories" active={false}>
                             <div className={(open ? 'pl-5' : 'justify-center') + " flex items-center space-x-5"}>
                                 <SwatchIcon className="w-6 h-6" />
                                 <span className={open ? 'block' : 'hidden'}>Categories</span>

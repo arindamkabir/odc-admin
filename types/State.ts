@@ -5,6 +5,7 @@ import { Color } from "./Color";
 import { ColorListRequest } from "@/hooks/queries/color/useGetColorLists";
 import { SizeListRequest } from "@/hooks/queries/size/useGetSizeList";
 import { Size } from "./Size";
+import { OrderListRequest } from "@/hooks/queries/order/useGetOrderList";
 
 export type ProductState = {
     showingCreateProductDrawer: boolean,
@@ -46,4 +47,9 @@ export type SizeState = {
     setSizeListQueryParams: (params: SizeListRequest) => void,
 };
 
-export type BoundedState = ProductState & CategoryState & ColorState & SizeState;
+export type OrderState = {
+    orderListQueryParams: OrderListRequest,
+    setOrderListQueryParams: (params: OrderListRequest) => void
+}
+
+export type BoundedState = ProductState & CategoryState & ColorState & SizeState & OrderState;
