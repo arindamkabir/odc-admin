@@ -7,6 +7,7 @@ import DashboardLayout from '@/components/layouts/DashboardLayout';
 import ProductsTable from '@/components/tables/ProductsTable';
 import { useGetProductList } from '@/hooks/queries/product/useGetProductList'
 import useStore from '@/store/store';
+import Link from 'next/link';
 import React from 'react'
 
 const ProductHomePage = () => {
@@ -24,7 +25,7 @@ const ProductHomePage = () => {
                     <div className="stat">
                         <div className="stat-title">Category Count</div>
                         <div className="stat-value">89,400</div>
-                        <div className="stat-desc">21% more than last month</div>
+                        <Link className='hover:text-accent mt-4' href="/categories">View Sizes</Link>
                     </div>
 
                 </div>
@@ -33,7 +34,7 @@ const ProductHomePage = () => {
                     <div className="stat">
                         <div className="stat-title">Size Count</div>
                         <div className="stat-value">89,400</div>
-                        <div className="stat-desc">21% more than last month</div>
+                        <Link className='hover:text-accent mt-4' href="/sizes">View Sizes</Link>
                     </div>
 
                 </div>
@@ -42,7 +43,7 @@ const ProductHomePage = () => {
                     <div className="stat">
                         <div className="stat-title">Color Count</div>
                         <div className="stat-value">89,400</div>
-                        <div className="stat-desc">21% more than last month</div>
+                        <Link className='hover:text-accent mt-4' href="/colors">View Sizes</Link>
                     </div>
 
                 </div>

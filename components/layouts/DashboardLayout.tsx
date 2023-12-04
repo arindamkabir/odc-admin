@@ -12,7 +12,7 @@ type DashboardLayoutProps = {
 const DashboardLayout = ({ header, children }: DashboardLayoutProps) => {
     const router = useRouter();
 
-    // const { user, isPending, logout } = useAuth("auth");
+    const { user, isPending, logout } = useAuth("auth");
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     // const { user, isPending, logout } = useAuth("auth");

@@ -65,14 +65,14 @@ export default function Sidebar() {
                             </div>
                         </SidebarLink>
 
-                        <SidebarLink href="/" active={false}>
+                        <SidebarLink href="/orders" active={false}>
                             <div className={(open ? 'pl-5' : 'justify-center') + " flex items-center space-x-5"}>
                                 <CreditCardIcon className="w-6 h-6" />
                                 <span className={open ? 'block' : 'hidden'}>Orders</span>
                             </div>
                         </SidebarLink>
 
-                        <SidebarLink href="/" active={false}>
+                        {/* <SidebarLink href="/" active={false}>
                             <div className={(open ? 'pl-5' : 'justify-center') + " flex items-center space-x-5"}>
                                 <UsersIcon className="w-6 h-6" />
                                 <span className={open ? 'block' : 'hidden'}>Customers</span>
@@ -84,7 +84,7 @@ export default function Sidebar() {
                                 <CogIcon className="w-6 h-6" />
                                 <span className={open ? 'block' : 'hidden'}>Settings</span>
                             </div>
-                        </SidebarLink>
+                        </SidebarLink> */}
                     </div>
                 </nav>
             </div>
