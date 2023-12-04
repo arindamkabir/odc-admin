@@ -17,7 +17,7 @@ export type UpdateCategoryRequest = {
 const updateCategory = async (data: UpdateCategoryRequest) => {
     const response = await axios.put(`/api/admin/categories/${data.id}`, {
         name: data.name,
-        parent_id: data.parent?.id ?? null,
+        parent_id: data.parent?.id ?? undefined,
         is_featured: data.is_featured ? 'true' : 'false',
         is_hidden: data.is_hidden ? 'true' : 'false',
     });

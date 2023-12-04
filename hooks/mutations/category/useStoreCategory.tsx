@@ -16,7 +16,7 @@ export type StoreCategoryRequest = {
 const storeCategory = async (data: StoreCategoryRequest) => {
     const response = await axios.post('/api/admin/categories', {
         name: data.name,
-        parent_id: data.parent?.id ?? null,
+        parent_id: data.parent?.id ?? undefined,
         is_featured: data.is_featured ? 'true' : 'false',
         is_hidden: data.is_hidden ? 'true' : 'false',
     });
