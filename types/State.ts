@@ -6,6 +6,8 @@ import { ColorListRequest } from "@/hooks/queries/color/useGetColorLists";
 import { SizeListRequest } from "@/hooks/queries/size/useGetSizeList";
 import { Size } from "./Size";
 import { OrderListRequest } from "@/hooks/queries/order/useGetOrderList";
+import { Product } from "./Product";
+import { SavingOrderProduct } from "./Order";
 
 export type ProductState = {
     showingCreateProductDrawer: boolean,
@@ -49,7 +51,16 @@ export type SizeState = {
 
 export type OrderState = {
     orderListQueryParams: OrderListRequest,
-    setOrderListQueryParams: (params: OrderListRequest) => void
+    orderProductList: SavingOrderProduct[],
+    showingAddOrderProductDrawer: boolean,
+    showingOrderProductListDrawer: boolean,
+    selectedOrderProduct: Product | null,
+    setOrderListQueryParams: (params: OrderListRequest) => void,
+    addOrderProduct: (product: SavingOrderProduct) => void,
+    removeOrderProduct: (product_id: SavingOrderProduct['id'], stock_id: SavingOrderProduct["stock"]["id"]) => void,
+    showAddOrderProductDrawer: (val: boolean) => void,
+    showOrderProductListDrawer: (val: boolean) => void,
+    setSelectedOrderProduct: (product: Product | null) => void
 }
 
 export type BoundedState = ProductState & CategoryState & ColorState & SizeState & OrderState;

@@ -1,4 +1,4 @@
-import { Product } from "./Product";
+import { Product, Stock } from "./Product";
 
 type OrderItem = {
     id: number;
@@ -95,4 +95,27 @@ export type OrderWProduct = {
     customer: Customer | null;
     order_items: OrderItemWProduct[];
     transaction: Transaction;
+}
+
+export type SavingOrderProduct = {
+    id: number;
+    name: string;
+    slug: string;
+    category_id: number;
+    description: string;
+    price: string;
+    SKU: string;
+    stock: Stock;
+    orderQuantity: number;
+    primary_image: {
+        id: number;
+        url: string;
+        type: string;
+        imageable_id: number;
+        imageable_type: string;
+        created_at: string;
+        updated_at: string;
+        full_url: string;
+        storage_path: string;
+    };
 }

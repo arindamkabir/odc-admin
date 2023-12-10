@@ -5,6 +5,7 @@ import Select from '@/components/common/form/Select';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import OrdersTable from '@/components/tables/OrdersTable';
 import useStore from '@/store/store';
+import { useRouter } from 'next/router';
 import React from 'react'
 
 const STATUSES = [
@@ -41,6 +42,7 @@ const STATUSES = [
 
 const OrderIndexPage = () => {
     // const setShowingCreateProductDrawer = useStore(state => state.setShowingCreateProductDrawer);
+    const router = useRouter();
     const orderListQueryParams = useStore(state => state.orderListQueryParams);
     const setOrderListQueryParams = useStore(state => state.setOrderListQueryParams);
 
@@ -69,7 +71,7 @@ const OrderIndexPage = () => {
                     </Select>
 
                     <PrimaryButton
-                    // onClick={() => setShowingCreateProductDrawer(true)}
+                        onClick={() => router.push('/orders/add')}
                     >
                         Add New
                     </PrimaryButton>

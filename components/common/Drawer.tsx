@@ -8,9 +8,10 @@ type IDrawerProps = {
     onClose: () => void;
     title: React.ReactNode;
     children?: React.ReactNode;
+    drawerScollableDivID?: string
 }
 
-export default function Drawer({ open, onClose, title, children }: IDrawerProps) {
+export default function Drawer({ open, onClose, title, children, drawerScollableDivID }: IDrawerProps) {
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={onClose}>
@@ -38,7 +39,7 @@ export default function Drawer({ open, onClose, title, children }: IDrawerProps)
                             leaveTo="translate-x-full"
                         >
                             <div className="w-screen max-w-md">
-                                <div className="h-full flex flex-col py-6 bg-base-100 shadow-xl overflow-y-scroll">
+                                <div className="h-full flex flex-col py-6 bg-base-100 shadow-xl overflow-y-scroll" id={drawerScollableDivID ?? undefined}>
                                     <div className="px-4 sm:px-6">
                                         <div className="flex items-start justify-between">
                                             <Dialog.Title className="text-lg font-medium ">{title}</Dialog.Title>
