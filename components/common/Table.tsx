@@ -8,7 +8,7 @@ type TableProps = {
 
 const Table = ({ containerClassName, tableClassName, children }: TableProps) => {
     return (
-        <div className={`overflow-auto ${containerClassName}`}>
+        <div className={`overflow-x-auto ${containerClassName}`}>
             <table className={`table ${tableClassName}`}>
                 {children}
             </table>

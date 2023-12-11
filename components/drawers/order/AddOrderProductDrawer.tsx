@@ -28,7 +28,7 @@ const AddOrderProductDrawer = () => {
         setSelectedSize(null);
         setSelectedColor(null);
         setQuantity(0);
-    }, [])
+    }, [selectedOrderProduct])
 
     const { colors: availableColors, sizes } = useMemo(() => {
         let colors: Color[] = [];
@@ -113,6 +113,10 @@ const AddOrderProductDrawer = () => {
         }
 
         addOrderProduct(orderProduct);
+
+        setSelectedSize(null);
+        setSelectedColor(null);
+        setQuantity(0);
 
         showAddOrderProductDrawer(false);
         setSelectedOrderProduct(null);

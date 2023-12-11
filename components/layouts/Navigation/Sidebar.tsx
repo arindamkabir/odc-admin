@@ -10,7 +10,7 @@ export default function Sidebar() {
 
     return (
         <div className="flex-none hidden shadow md:block">
-            <div className={(open ? "w-72" : "w-20") + " overflow-x-hidden overflow-y-auto transition-all duration-300 border-r bg-base-300 border-gray-500 dark:border-gray-700"}>
+            <div className={(open ? "w-72" : "w-20") + " overflow-x-hidden overflow-y-hidden transition-all duration-300 border-r bg-base-300 border-gray-500 dark:border-gray-700"}>
                 <nav
                     className={(open ? "space-y-1" : "space-y-1.5") + " flex flex-col flex-grow flex-shrink-0 overflow-x-hidden md:min-h-screen md:pb-0 md:overflow-y-auto"}
                     onMouseOver={() => setOpen(true)}

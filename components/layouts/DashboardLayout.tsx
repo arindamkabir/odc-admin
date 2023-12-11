@@ -46,7 +46,7 @@ const DashboardLayout = ({ header, children }: DashboardLayoutProps) => {
                 //     <span className="loading loading-infinity loading-lg"></span>
                 // </main>
                 // :
-                <div className="min-h-screen ">
+                <div className="min-h-screen">
                     <nav className="bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-700">
                         <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' md:hidden'}>
                             <div className="pt-2 pb-3 space-y-1">
