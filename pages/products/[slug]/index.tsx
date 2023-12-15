@@ -17,8 +17,11 @@ import React from 'react'
 
 export const getServerSideProps = (async (context) => {
     const slug = context.params?.slug as string || 'random-slug';
+    const { req, res } = context;
     try {
-        const response = await axios.get<{ product: Product & { extra_images: ProductImage<null>[] } }>(`/api/admin/products/${slug}`);
+        const response = await axios.get<{ product: Product & { extra_images: ProductImage<null>[] } }>(`/api/admin/products/${slug}`, {
+            headers: { ...req.headers }
+        });
 
         const product = response.data.product;
 
