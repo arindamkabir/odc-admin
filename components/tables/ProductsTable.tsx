@@ -20,6 +20,8 @@ const ProductsTable = () => {
 
     const { data: productListResponse, isFetching } = useGetProductList(productListQueryParams);
 
+    console.log(productListResponse)
+
     return (
         <>
             <Table>

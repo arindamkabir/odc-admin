@@ -20,11 +20,13 @@ export const getServerSideProps = (async (context) => {
     const { req, res } = context;
     try {
         const response = await axios.get<{ product: Product & { extra_images: ProductImage<null>[] } }>(`/api/admin/products/${slug}`, {
-            headers: { ...req.headers }
+            headers: {
+                origin: process.env.NEXT_PUBLIC_APP_ORIGIN ?? 'localhost:3000',
+                Cookie: req.headers.cookie
+            }
         });
 
         const product = response.data.product;
-
 
         return { props: { product } }
     } catch (e) {
