@@ -38,7 +38,7 @@ const EditProductForm = () => {
         reset()
     }, [editingProduct, reset]);
 
-    const { mutate, isPending } = useUpdateProduct(setError, () => { showEditProductDrawer(false); router.replace(router.asPath); });
+    const { mutate, isPending } = useUpdateProduct(setError, () => { showEditProductDrawer(false); router.reload() });
 
     const updateProduct: SubmitHandler<UpdateProductFormInputs> = async (data) => {
         if (!editingProduct) return;

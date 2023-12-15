@@ -18,7 +18,7 @@ const AddProductImageForm = ({ id }: { id: Product["id"] }) => {
 
     const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreProductImageInputs>({});
 
-    const { mutate, isPending } = useStoreProductImage(() => { showAddProductImageDrawer(false); router.replace(router.asPath); });
+    const { mutate, isPending } = useStoreProductImage(() => { showAddProductImageDrawer(false); router.reload() });
 
     const updateImage: SubmitHandler<StoreProductImageInputs> = async (data) => {
         console.log(data);

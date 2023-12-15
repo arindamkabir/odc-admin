@@ -18,7 +18,7 @@ const UpdateProductPrimaryImageForm = ({ id }: { id: Product["id"] }) => {
     const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<UpdateProductPrimaryImageFormInputs>({
     });
 
-    const { mutate, isPending } = useUpdateProductPrimaryImage(() => { showUpdateProductPrimaryImageDrawer(false); router.replace(router.asPath); });
+    const { mutate, isPending } = useUpdateProductPrimaryImage(() => { showUpdateProductPrimaryImageDrawer(false); router.reload() });
 
     const updateImage: SubmitHandler<UpdateProductPrimaryImageFormInputs> = async (data) => {
         console.log(data);
