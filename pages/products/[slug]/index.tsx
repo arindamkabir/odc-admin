@@ -31,6 +31,7 @@ export const getServerSideProps = (async (context) => {
 
         return { props: { product } }
     } catch (e) {
+        console.error(e);
         return {
             redirect: {
                 destination: '/404',
