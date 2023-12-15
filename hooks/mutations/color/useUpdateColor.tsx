@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { UseFormSetError } from "react-hook-form";
 import { ErrorResponse } from "@/types/Error"
+import { toast } from "react-toastify";
 
 export type UpdateColorRequest = {
     id: number,
@@ -26,8 +27,8 @@ export const useUpdateColor = (setError: UseFormSetError<UpdateColorRequest>, on
     return useMutation<any, AxiosError<ErrorResponse>, UpdateColorRequest>({
         mutationFn: updateColor,
         onSuccess: (res) => {
-            // router.push('dashboard');
-            queryClient.invalidateQueries({ queryKey: ['colors'] })
+            queryClient.invalidateQueries({ queryKey: ['colors', 'list'] });
+            toast.success('Color updated.');
             onSuccess();
         },
         onError: (err) => {
@@ -36,6 +37,7 @@ export const useUpdateColor = (setError: UseFormSetError<UpdateColorRequest>, on
                     setError(key as keyof UpdateColorRequest, { type: "custom", message: value[0] });
                 }
             }
+            toast.error('Something went wrong.');
         }
     });
 }

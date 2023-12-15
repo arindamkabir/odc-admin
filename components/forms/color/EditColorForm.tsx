@@ -1,30 +1,45 @@
-import { StoreColorRequest, useStoreColor } from '@/hooks/mutations/color/useStoreColor';
 import useStore from '@/store/store';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import Label from '../common/form/Label';
-import Input from '../common/form/Input';
-import InputError from '../common/form/InputError';
-import PrimaryButton from '../common/buttons/PrimaryButton';
-import { SketchPicker } from 'react-color';
-import ColorPicker from '../common/form/ColorPicker';
+import Label from '../../common/form/Label';
+import Input from '../../common/form/Input';
+import InputError from '../../common/form/InputError';
+import PrimaryButton from '../../common/buttons/PrimaryButton';
+import { UpdateColorRequest, useUpdateColor } from '@/hooks/mutations/color/useUpdateColor';
+import ColorPicker from '../../common/form/ColorPicker';
 
-const CreateColorForm = () => {
-    const showCreateColorDrawer = useStore(state => state.showCreateColorDrawer);
+type UpdateColorFormState = Omit<UpdateColorRequest, 'id'>;
 
-    const { register, handleSubmit, formState: { errors }, control, setError } = useForm<StoreColorRequest>({});
+const EditColorForm = () => {
+    const editingColor = useStore(state => state.editingColor);
+    const showEditColorDrawer = useStore(state => state.showEditColorDrawer);
 
-    const { mutate, isPending } = useStoreColor(setError, () => { showCreateColorDrawer(false) });
+    const { register, handleSubmit, formState: { errors }, control, reset, setError } = useForm<UpdateColorFormState>({
+        defaultValues: {
+            name: editingColor?.name ?? '',
+            hex_code: editingColor?.hex_code ?? '#000000'
+        }
+    });
 
-    const storeColor: SubmitHandler<StoreColorRequest> = async (data) => {
-        console.log(data)
-        mutate(data);
+    useEffect(() => {
+        if (!editingColor) return;
+        reset()
+    }, [editingColor, reset]);
+
+    const { mutate, isPending } = useUpdateColor(setError, () => { showEditColorDrawer(false) });
+
+    const updateColor: SubmitHandler<UpdateColorFormState> = async (data) => {
+        if (!editingColor) return;
+        mutate({
+            id: editingColor.id,
+            ...data
+        });
     }
 
     return (
         <form
             className="w-full flex flex-col h-full justify-between"
-            onSubmit={handleSubmit(storeColor)}
+            onSubmit={handleSubmit(updateColor)}
         >
             <div className='space-y-4'>
                 <div className='space-y-1'>
@@ -63,6 +78,6 @@ const CreateColorForm = () => {
             </PrimaryButton>
         </form>
     )
-};
+}
 
-export default CreateColorForm;
+export default EditColorForm;

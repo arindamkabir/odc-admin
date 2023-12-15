@@ -1,10 +1,10 @@
 import useStore from '@/store/store';
 import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Label from '../common/form/Label';
-import Input from '../common/form/Input';
-import InputError from '../common/form/InputError';
-import PrimaryButton from '../common/buttons/PrimaryButton';
+import Label from '../../common/form/Label';
+import Input from '../../common/form/Input';
+import InputError from '../../common/form/InputError';
+import PrimaryButton from '../../common/buttons/PrimaryButton';
 import { UpdateSizeRequest, useUpdateSize } from '@/hooks/mutations/size/useUpdateSize';
 
 type UpdateSizeFormState = Omit<UpdateSizeRequest, 'id'>;

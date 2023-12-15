@@ -1,7 +1,7 @@
 import React from 'react'
 import Drawer from '../../common/Drawer';
 import useStore from '@/store/store';
-import CreateSizeForm from '@/components/forms/CreateSizeForm';
+import CreateSizeForm from '@/components/forms/size/CreateSizeForm';
 
 const CreateSizeDrawer = () => {
     const showingCreateSizeDrawer = useStore(state => state.showingCreateSizeDrawer);

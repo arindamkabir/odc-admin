@@ -19,7 +19,7 @@ const fetchOrderList = async (params: OrderListRequest): Promise<OrderListRespon
 
 export const useGetOrderList = (params: OrderListRequest) => {
     return useQuery<OrderListResponse, Error>({
-        queryKey: ['orders', params],
+        queryKey: ['orders', 'list', params],
         queryFn: () => {
             return fetchOrderList(params);
         }

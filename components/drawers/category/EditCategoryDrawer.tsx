@@ -1,7 +1,7 @@
 import React from 'react'
 import Drawer from '../../common/Drawer';
 import useStore from '@/store/store';
-import EditCategoryForm from '@/components/forms/EditCategoryForm';
+import EditCategoryForm from '@/components/forms/category/EditCategoryForm';
 
 const EditCategoryDrawer = () => {
     const showingEditCategoryDrawer = useStore(state => state.showingEditCategoryDrawer);

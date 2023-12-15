@@ -17,7 +17,7 @@ const fetchColor = async (params: ColorListRequest): Promise<ColorListResponse> 
 
 export const useGetColorList = (params: ColorListRequest) => {
     return useQuery<ColorListResponse, Error>({
-        queryKey: ['colors', params],
+        queryKey: ['colors', 'list', params],
         queryFn: () => {
             return fetchColor(params);
         }

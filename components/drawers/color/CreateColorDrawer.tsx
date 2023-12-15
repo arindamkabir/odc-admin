@@ -1,8 +1,8 @@
 import React from 'react'
 import Drawer from '../../common/Drawer';
 import useStore from '@/store/store';
-import CreateSizeForm from '@/components/forms/CreateSizeForm';
-import CreateColorForm from '@/components/forms/CreateColorForm';
+import CreateSizeForm from '@/components/forms/size/CreateSizeForm';
+import CreateColorForm from '@/components/forms/color/CreateColorForm';
 
 const CreateColorDrawer = () => {
     const showingCreateColorDrawer = useStore(state => state.showingCreateColorDrawer);

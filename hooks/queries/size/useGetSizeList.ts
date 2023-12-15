@@ -17,7 +17,7 @@ const fetchSizeList = async (params: SizeListRequest): Promise<SizeListResponse>
 
 export const useGetSizeList = (params: SizeListRequest) => {
     return useQuery<SizeListResponse, Error>({
-        queryKey: ['sizes', params],
+        queryKey: ['sizes', 'list', params],
         queryFn: () => {
             return fetchSizeList(params);
         }

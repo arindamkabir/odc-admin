@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 import { useLogout } from "./mutations/auth/useLogout";
+import { AxiosError } from "axios";
+import { ErrorResponse } from "@/types/Error";
 
 
 const fetchUser = async () => {
@@ -15,9 +17,10 @@ const fetchUser = async () => {
 export const useAuth = (middleware: "guest" | "auth") => {
     const router = useRouter();
 
-    const { data: user, isPending, error } = useQuery({
+    const { data: user, isPending, error } = useQuery<any, AxiosError<ErrorResponse>>({
         queryKey: ['user'],
         queryFn: fetchUser,
+        staleTime: Infinity
     });
 
     const { mutate: logout, isPending: isLogoutPending } = useLogout();
@@ -27,9 +30,11 @@ export const useAuth = (middleware: "guest" | "auth") => {
             router.push('/dashboard');
         }
 
-        if (middleware === "auth" && error) logout();
+        if (middleware === "auth" && error) {
+            if (error.response?.status === 401)
+                logout();
+        }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, error]);
 
     return { user, isPending: isPending && isLogoutPending, logout };

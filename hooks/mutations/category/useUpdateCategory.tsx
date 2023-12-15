@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { UseFormSetError } from "react-hook-form";
 import { ErrorResponse } from "@/types/Error"
 import { Category } from "@/types/Category";
+import { toast } from "react-toastify";
 
 export type UpdateCategoryRequest = {
     id: number,
@@ -31,8 +32,8 @@ export const useUpdateCategory = (setError: UseFormSetError<UpdateCategoryReques
     return useMutation<any, AxiosError<ErrorResponse>, UpdateCategoryRequest>({
         mutationFn: updateCategory,
         onSuccess: (res) => {
-            // router.push('dashboard');
-            queryClient.invalidateQueries({ queryKey: ['categories'] })
+            queryClient.invalidateQueries({ queryKey: ['categories', 'list'] });
+            toast.success('Category updated.');
             onSuccess();
         },
         onError: (err) => {
@@ -41,6 +42,7 @@ export const useUpdateCategory = (setError: UseFormSetError<UpdateCategoryReques
                     setError(key as keyof UpdateCategoryRequest, { type: "custom", message: value[0] });
                 }
             }
+            toast.error('Something went wrong.');
         }
     });
 }

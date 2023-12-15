@@ -6,14 +6,28 @@ import { ColorListRequest } from "@/hooks/queries/color/useGetColorLists";
 import { SizeListRequest } from "@/hooks/queries/size/useGetSizeList";
 import { Size } from "./Size";
 import { OrderListRequest } from "@/hooks/queries/order/useGetOrderList";
-import { Product } from "./Product";
+import { Product, Stock } from "./Product";
 import { SavingOrderProduct } from "./Order";
 
 export type ProductState = {
     showingCreateProductDrawer: boolean,
+    showingEditProductDrawer: boolean,
+    showingEditStockDrawer: boolean,
+    showingAddProductImageDrawer: boolean,
+    showingCreateStockDrawer: boolean,
+    showingUpdateProductPrimaryImageDrawer: boolean,
     productListQueryParams: ProductListRequest,
-    setShowingCreateProductDrawer: (value: boolean) => void,
+    editingProduct: Product | null,
+    editingStock: Stock | null,
+    showCreateProductDrawer: (value: boolean) => void,
+    showEditProductDrawer: (value: boolean) => void,
+    showEditStockDrawer: (value: boolean) => void,
+    setEditingProduct: (value: Product | null) => void,
+    setEditingStock: (value: Stock | null) => void,
+    showAddProductImageDrawer: (value: boolean) => void,
+    showCreateStockDrawer: (value: boolean) => void,
     setProductListQueryParams: (params: ProductListRequest) => void,
+    showUpdateProductPrimaryImageDrawer: (val: boolean) => void
 };
 
 export type CategoryState = {

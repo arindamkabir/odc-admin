@@ -9,6 +9,8 @@ import Td from '../common/table/Td'
 import useStore from '@/store/store'
 import Pagination from '../common/pagination/Pagination'
 import { useGetOrderList } from '@/hooks/queries/order/useGetOrderList'
+import TableRowSkeleton from '../common/table/TableSkeleton'
+import TableEmpty from '../common/table/TableEmpty'
 
 const STATUSES = [
     {
@@ -55,7 +57,7 @@ const OrdersTable = () => {
     const orderListQueryParams = useStore(state => state.orderListQueryParams);
     const setOrderListQueryParams = useStore(state => state.setOrderListQueryParams);
 
-    const { data: orderListResponse, isPending } = useGetOrderList(orderListQueryParams);
+    const { data: orderListResponse, isFetching } = useGetOrderList(orderListQueryParams);
 
     return (
         <>
@@ -77,30 +79,37 @@ const OrdersTable = () => {
                         <Th></Th>
                     </Tr>
                 </THead>
-                <TBody>
-                    {
-                        orderListResponse?.data.map(order =>
-                            <Tr key={`order-table-${order.id}`}>
-                                <Th>
-                                    <label>
-                                        <input type="checkbox" className="checkbox" />
-                                    </label>
-                                </Th>
-                                <Td>{order.id}</Td>
-                                <Td className='flex'>
-                                    <div className={`text-xs uppercase px-2 py-0.5 rounded-xl ${statusClasses[order.status]} text-white tracking-wide`}>{order.status}</div>
-                                </Td>
-                                <Td>৳ {order.subtotal}</Td>
-                                <Td>৳ {order.total}</Td>
-                                <Td>{order.coupon_id ?? '-'}</Td>
-                                <Td>{order.shipping.phone}</Td>
-                                <Td>Shipping Address</Td>
-                                <Td>
-                                    <button className="btn btn-ghost btn-xs">details</button>
-                                </Td>
-                            </Tr>
-                        )}
 
+                <TBody>
+                    {isFetching || !orderListResponse ?
+                        <TableRowSkeleton />
+                        :
+                        orderListResponse.data.length > 0 ?
+                            orderListResponse?.data.map(order =>
+                                <Tr key={`order-table-${order.id}`}>
+                                    <Th>
+                                        <label>
+                                            <input type="checkbox" className="checkbox" />
+                                        </label>
+                                    </Th>
+                                    <Td>{order.id}</Td>
+                                    <Td className='flex'>
+                                        <div className={`text-xs uppercase px-2 py-0.5 rounded-xl ${statusClasses[order.status]} text-white tracking-wide`}>{order.status}</div>
+                                    </Td>
+                                    <Td>৳ {order.subtotal}</Td>
+                                    <Td>৳ {order.total}</Td>
+                                    <Td>{order.coupon_id ?? '-'}</Td>
+                                    <Td>{order.shipping.phone}</Td>
+                                    <Td>Shipping Address</Td>
+                                    <Td>
+                                        <button className="btn btn-ghost btn-xs">details</button>
+                                    </Td>
+                                </Tr>
+                            )
+
+                            :
+                            <TableEmpty />
+                    }
                 </TBody>
                 <TFoot>
                     <Tr>

@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { UseFormSetError } from "react-hook-form";
 import { ErrorResponse } from "@/types/Error"
+import { toast } from "react-toastify";
 
 export type UpdateSizeRequest = {
     id: number,
@@ -24,8 +25,8 @@ export const useUpdateSize = (setError: UseFormSetError<UpdateSizeRequest>, onSu
     return useMutation<any, AxiosError<ErrorResponse>, UpdateSizeRequest>({
         mutationFn: updateSize,
         onSuccess: (res) => {
-            // router.push('dashboard');
-            queryClient.invalidateQueries({ queryKey: ['sizes'] })
+            queryClient.invalidateQueries({ queryKey: ['sizes', 'list'] });
+            toast.success('Size updated.');
             onSuccess();
         },
         onError: (err) => {
@@ -34,6 +35,7 @@ export const useUpdateSize = (setError: UseFormSetError<UpdateSizeRequest>, onSu
                     setError(key as keyof UpdateSizeRequest, { type: "custom", message: value[0] });
                 }
             }
+            toast.error('Something went wrong');
         }
     });
 }

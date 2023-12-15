@@ -1,7 +1,7 @@
 import React from 'react'
 import Drawer from '../../common/Drawer';
 import useStore from '@/store/store';
-import EditColorForm from '@/components/forms/EditColorForm';
+import EditColorForm from '@/components/forms/color/EditColorForm';
 
 const EditColorDrawer = () => {
     const showingEditColorDrawer = useStore(state => state.showingEditColorDrawer);

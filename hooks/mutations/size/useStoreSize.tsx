@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { UseFormSetError } from "react-hook-form";
 import { ErrorResponse } from "@/types/Error"
+import { toast } from "react-toastify";
 
 export type StoreSizeRequest = {
     name: string
@@ -21,8 +22,8 @@ export const useStoreSize = (setError: UseFormSetError<StoreSizeRequest>, onSucc
     return useMutation<any, AxiosError<ErrorResponse>, StoreSizeRequest>({
         mutationFn: storeSize,
         onSuccess: (res) => {
-            // router.push('dashboard');
-            queryClient.invalidateQueries({ queryKey: ['sizes'] })
+            queryClient.invalidateQueries({ queryKey: ['sizes', 'list'] });
+            toast.success('Size added.');
             onSuccess();
         },
         onError: (err) => {
@@ -31,6 +32,7 @@ export const useStoreSize = (setError: UseFormSetError<StoreSizeRequest>, onSucc
                     setError(key as keyof StoreSizeRequest, { type: "custom", message: value[0] });
                 }
             }
+            toast.error('Something went wrong');
         }
     });
 }

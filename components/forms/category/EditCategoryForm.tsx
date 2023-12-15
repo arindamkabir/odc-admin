@@ -1,14 +1,14 @@
 import useStore from '@/store/store';
 import React, { useEffect } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import Label from '../common/form/Label';
-import Input from '../common/form/Input';
+import Label from '../../common/form/Label';
+import Input from '../../common/form/Input';
 import { StoreCategoryRequest, useStoreCategory } from '@/hooks/mutations/category/useStoreCategory';
 import { Category } from '@/types/Category';
-import InputError from '../common/form/InputError';
-import CategorySelect from '../products/CategorySelect';
-import Toggle from '../common/form/Toggle';
-import PrimaryButton from '../common/buttons/PrimaryButton';
+import InputError from '../../common/form/InputError';
+import CategorySelect from '../../products/CategorySelect';
+import Toggle from '../../common/form/Toggle';
+import PrimaryButton from '../../common/buttons/PrimaryButton';
 import { UpdateCategoryRequest, useUpdateCategory } from '@/hooks/mutations/category/useUpdateCategory';
 
 type UpdateCategoryFormState = Omit<UpdateCategoryRequest, 'id'>;

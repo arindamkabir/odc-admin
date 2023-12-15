@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { UseFormSetError } from "react-hook-form";
 import { ErrorResponse } from "@/types/Error"
+import { toast } from "react-toastify";
 
 export type StoreColorRequest = {
     name: string,
@@ -23,8 +24,8 @@ export const useStoreColor = (setError: UseFormSetError<StoreColorRequest>, onSu
     return useMutation<any, AxiosError<ErrorResponse>, StoreColorRequest>({
         mutationFn: storeColor,
         onSuccess: (res) => {
-            // router.push('dashboard');
-            queryClient.invalidateQueries({ queryKey: ['colors'] })
+            queryClient.invalidateQueries({ queryKey: ['colors', 'list'] });
+            toast.success('Color added.');
             onSuccess();
         },
         onError: (err) => {
@@ -33,6 +34,7 @@ export const useStoreColor = (setError: UseFormSetError<StoreColorRequest>, onSu
                     setError(key as keyof StoreColorRequest, { type: "custom", message: value[0] });
                 }
             }
+            toast.error('Something went wrong.');
         }
     });
 }

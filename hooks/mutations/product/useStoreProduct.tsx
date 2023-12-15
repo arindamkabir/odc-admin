@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { UseFormSetError } from "react-hook-form";
 import { ErrorResponse } from "@/types/Error"
 import { Category } from "@/types/Category";
+import { toast } from "react-toastify";
 
 export type StoreProductRequest = {
     name: string,
@@ -16,6 +17,8 @@ export type StoreProductRequest = {
     secondary_img?: Blob,
     is_featured: boolean,
     is_hidden: boolean,
+    has_colors: boolean,
+    has_sizes: boolean,
 }
 
 const storeProduct = async (data: StoreProductRequest) => {
@@ -30,6 +33,8 @@ const storeProduct = async (data: StoreProductRequest) => {
     formData.append('primary_img', data.primary_img[0]);
     formData.append('is_featured', data.is_featured ? 'true' : 'false');
     formData.append('is_hidden', data.is_hidden ? 'true' : 'false');
+    formData.append('has_colors', data.has_colors ? 'true' : 'false');
+    formData.append('has_sizes', data.has_sizes ? 'true' : 'false');
 
     const response = await axios.post('/api/admin/products/', formData);
 
@@ -53,8 +58,9 @@ export const useStoreProduct = (setError: UseFormSetError<StoreProductRequest>, 
     return useMutation<any, AxiosError<ErrorResponse>, StoreProductRequest>({
         mutationFn: storeProduct,
         onSuccess: (res) => {
-            // router.push('dashboard');
-            queryClient.invalidateQueries({ queryKey: ['habits'] })
+            queryClient.invalidateQueries({ queryKey: ['products', 'list'] });
+            queryClient.invalidateQueries({ queryKey: ['infiniteProducts', 'list'] });
+            toast.success('Product added.');
             onSuccess();
         },
         onError: (err) => {
@@ -63,6 +69,7 @@ export const useStoreProduct = (setError: UseFormSetError<StoreProductRequest>, 
                     setError(key as keyof StoreProductRequest, { type: "custom", message: value[0] });
                 }
             }
+            toast.error('Something went wrong');
         }
     });
 }

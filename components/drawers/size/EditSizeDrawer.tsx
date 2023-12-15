@@ -1,7 +1,7 @@
 import React from 'react'
 import Drawer from '../../common/Drawer';
 import useStore from '@/store/store';
-import EditSizeForm from '@/components/forms/EditSizeForm';
+import EditSizeForm from '@/components/forms/size/EditSizeForm';
 
 const EditSizeDrawer = () => {
     const showingEditSizeDrawer = useStore(state => state.showingEditSizeDrawer);

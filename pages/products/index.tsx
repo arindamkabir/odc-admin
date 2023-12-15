@@ -11,7 +11,7 @@ import Link from 'next/link';
 import React from 'react'
 
 const ProductHomePage = () => {
-    const setShowingCreateProductDrawer = useStore(state => state.setShowingCreateProductDrawer);
+    const showCreateProductDrawer = useStore(state => state.showCreateProductDrawer);
     const productListQueryParams = useStore(state => state.productListQueryParams);
     const setProductListQueryParams = useStore(state => state.setProductListQueryParams);
 
@@ -56,7 +56,7 @@ const ProductHomePage = () => {
                 />
 
                 <PrimaryButton
-                    onClick={() => setShowingCreateProductDrawer(true)}
+                    onClick={() => showCreateProductDrawer(true)}
                 >
                     Add New
                 </PrimaryButton>

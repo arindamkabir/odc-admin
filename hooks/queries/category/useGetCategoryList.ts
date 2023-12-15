@@ -17,7 +17,7 @@ const fetchCategoryList = async (params: CategoryListRequest): Promise<CategoryL
 
 export const useGetCategoryList = (params: CategoryListRequest) => {
     return useQuery<CategoryListResponse, Error>({
-        queryKey: ['categories', params],
+        queryKey: ['categories', 'list', params],
         queryFn: () => {
             return fetchCategoryList(params);
         }

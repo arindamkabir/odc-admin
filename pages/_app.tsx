@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import "react-toastify/dist/ReactToastify.css";
+import 'react-loading-skeleton/dist/skeleton.css';
 import type { AppProps } from 'next/app';
 import { Poppins } from 'next/font/google';
 import { CloseButtonProps, ToastContainer } from "react-toastify"

@@ -41,7 +41,7 @@ const STATUSES = [
 ];
 
 const OrderIndexPage = () => {
-    // const setShowingCreateProductDrawer = useStore(state => state.setShowingCreateProductDrawer);
+    // const showCreateProductDrawer = useStore(state => state.showCreateProductDrawer);
     const router = useRouter();
     const orderListQueryParams = useStore(state => state.orderListQueryParams);
     const setOrderListQueryParams = useStore(state => state.setOrderListQueryParams);

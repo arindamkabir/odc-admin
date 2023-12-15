@@ -19,8 +19,8 @@ export const useDeleteCategory = (onSuccess: () => void) => {
     return useMutation<any, AxiosError<ErrorResponse>, Category['id']>({
         mutationFn: deleteCategory,
         onSuccess: (res) => {
-            // router.push('dashboard');
-            queryClient.invalidateQueries({ queryKey: ['categories'] })
+            queryClient.invalidateQueries({ queryKey: ['categories', 'list'] });
+            toast.warning('Category deleted.');
             onSuccess();
         },
         onError: (err) => {

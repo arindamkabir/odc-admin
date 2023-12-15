@@ -12,6 +12,8 @@ import Pagination from '../common/pagination/Pagination'
 import { useGetCategoryList } from '@/hooks/queries/category/useGetCategoryList'
 import { formatISO } from 'date-fns'
 import { formatISOString } from '@/utils/dateTime'
+import TableRowSkeleton from '../common/table/TableSkeleton'
+import TableEmpty from '../common/table/TableEmpty'
 
 const CategoriesTable = () => {
     const categoryListQueryParams = useStore(state => state.categoryListQueryParams);
@@ -19,7 +21,7 @@ const CategoriesTable = () => {
     const setShowingEditCategoryDrawer = useStore(state => state.setShowingEditCategoryDrawer);
     const setEditingCategory = useStore(state => state.setEditingCategory);
 
-    const { data: categoryListResponse, isPending } = useGetCategoryList(categoryListQueryParams);
+    const { data: categoryListResponse, isFetching } = useGetCategoryList(categoryListQueryParams);
 
     return (
         <>
@@ -39,39 +41,45 @@ const CategoriesTable = () => {
                     </Tr>
                 </THead>
                 <TBody>
-                    {
-                        categoryListResponse?.data.map(category =>
-                            <Tr key={`category-table-${category.slug}-${category.id}`}>
-                                <Th>
-                                    <label>
-                                        <input type="checkbox" className="checkbox" />
-                                    </label>
-                                </Th>
-                                <Td>{category.name}</Td>
-                                <Td>{category.parent?.name ?? '-'}</Td>
-                                <Td>{category.products_count}</Td>
-                                <Td>{category?.updated_at ? formatISOString(category.updated_at, "PP") : '-'}</Td>
-                                <Td className='flex items-center space-x-3'>
-                                    <button className="btn btn-ghost btn-xs">details</button>
-                                    <button
-                                        className="btn btn-ghost btn-xs"
-                                        onClick={() => {
-                                            setEditingCategory(category);
-                                            setShowingEditCategoryDrawer(true);
-                                        }}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className="btn btn-ghost btn-xs"
-                                        onClick={() => {
-                                        }}
-                                    >
-                                        Delete
-                                    </button>
-                                </Td>
-                            </Tr>
-                        )}
+                    {isFetching || !categoryListResponse ?
+                        <TableRowSkeleton />
+                        :
+                        categoryListResponse.data.length > 0 ?
+                            categoryListResponse.data.map(category =>
+                                <Tr key={`category-table-${category.slug}-${category.id}`}>
+                                    <Th>
+                                        <label>
+                                            <input type="checkbox" className="checkbox" />
+                                        </label>
+                                    </Th>
+                                    <Td>{category.name}</Td>
+                                    <Td>{category.parent?.name ?? '-'}</Td>
+                                    <Td>{category.products_count}</Td>
+                                    <Td>{category?.updated_at ? formatISOString(category.updated_at, "PP") : '-'}</Td>
+                                    <Td className='flex items-center space-x-3'>
+                                        <button className="btn btn-ghost btn-xs">details</button>
+                                        <button
+                                            className="btn btn-ghost btn-xs"
+                                            onClick={() => {
+                                                setEditingCategory(category);
+                                                setShowingEditCategoryDrawer(true);
+                                            }}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="btn btn-ghost btn-xs"
+                                            onClick={() => {
+                                            }}
+                                        >
+                                            Delete
+                                        </button>
+                                    </Td>
+                                </Tr>
+                            )
+                            :
+                            <TableEmpty />
+                    }
                 </TBody>
                 <TFoot>
                     <Tr>

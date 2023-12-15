@@ -17,7 +17,7 @@ const fetchProductList = async (params: ProductListRequest): Promise<ProductList
 
 export const useGetProductList = (params: ProductListRequest) => {
     return useQuery<ProductListResponse, Error>({
-        queryKey: ['products', params],
+        queryKey: ['products', 'list', params],
         queryFn: () => {
             return fetchProductList(params);
         }

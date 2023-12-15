@@ -1,46 +1,59 @@
-import React from 'react'
-import Label from '../common/form/Label';
-import Input from '../common/form/Input';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { StoreProductRequest, useStoreProduct } from '@/hooks/mutations/product/useStoreProduct';
-import InputError from '../common/form/InputError';
-import SearchableSelect from '../common/form/SearchableSelect';
-import PrimaryButton from '../common/buttons/PrimaryButton';
-import { PlusIcon } from '@heroicons/react/24/solid';
+import PrimaryButton from '@/components/common/buttons/PrimaryButton';
+import FileInput from '@/components/common/form/FileInput';
+import Input from '@/components/common/form/Input';
+import InputError from '@/components/common/form/InputError';
+import Label from '@/components/common/form/Label';
+import TextArea from '@/components/common/form/TextArea';
+import Toggle from '@/components/common/form/Toggle';
+import CategorySelect from '@/components/products/CategorySelect';
+import { UpdateProductRequest, useUpdateProduct } from '@/hooks/mutations/product/useUpdateProduct';
 import useStore from '@/store/store';
-import CategorySelect from '../products/CategorySelect';
-import { Category } from '@/types/Category';
-import TextArea from '../common/form/TextArea';
-import Toggle from '../common/form/Toggle';
-import FileInput from '../common/form/FileInput';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
+type UpdateProductFormInputs = Omit<UpdateProductRequest, 'id'>;
 
-const CreateProductForm = () => {
-    const showingCreateCategoryDrawer = useStore(state => state.showingCreateCategoryDrawer);
-    const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
-    const setShowingCreateProductDrawer = useStore(state => state.setShowingCreateProductDrawer);
+const EditProductForm = () => {
+    const router = useRouter();
+    const editingProduct = useStore(state => state.editingProduct);
+    const showEditProductDrawer = useStore(state => state.showEditProductDrawer);
 
-    const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreProductRequest>({
-        // defaultValues: {
-        //     name: '',
-        //     category_id: '',
-        //     entry_type: 'boolean'
-        // }
+    const { register, handleSubmit, control, watch, formState: { errors }, setValue, reset, setError } = useForm<UpdateProductFormInputs>({
+        defaultValues: {
+            name: editingProduct?.name ?? '',
+            category: editingProduct?.category ?? null,
+            price: editingProduct?.price ?? '0',
+            description: editingProduct?.description ?? '',
+            SKU: editingProduct?.SKU ?? '',
+            is_featured: editingProduct?.is_featured ?? false,
+            is_hidden: editingProduct?.is_hidden ?? false,
+            has_colors: editingProduct?.has_colors ?? false,
+            has_sizes: editingProduct?.has_sizes ?? false,
+        }
     });
 
-    const { mutate, isPending } = useStoreProduct(setError, () => { setShowingCreateProductDrawer(false) });
+    useEffect(() => {
+        if (!editingProduct) return;
+        reset()
+    }, [editingProduct, reset]);
 
-    const storeProduct: SubmitHandler<StoreProductRequest> = async (data) => {
-        console.log(data);
-        mutate(data);
+    const { mutate, isPending } = useUpdateProduct(setError, () => { showEditProductDrawer(false); router.replace(router.asPath); });
+
+    const updateProduct: SubmitHandler<UpdateProductFormInputs> = async (data) => {
+        if (!editingProduct) return;
+        mutate({
+            id: editingProduct.id,
+            ...data
+        });
     }
 
     return (
         <form
             className="w-full flex flex-col h-full justify-between"
-            onSubmit={handleSubmit(storeProduct)}
+            onSubmit={handleSubmit(updateProduct)}
         >
-            <div className='space-y-4'>
+            <div className='space-y-4 mb-6'>
                 <div className='space-y-1'>
                     <Label>Name</Label>
                     <Input
@@ -96,12 +109,6 @@ const CreateProductForm = () => {
                     {errors.description && <InputError message={errors.description.message} />}
                 </div>
 
-                {/* Images */}
-                <div className='space-y-1'>
-                    <Label>Primary Image</Label>
-                    <FileInput {...register('primary_img', { required: { value: true, message: "Description is required." } })} />
-                </div>
-
                 <div className='space-y-1'>
                     <Label>Feature Product?</Label>
                     <Controller
@@ -136,6 +143,40 @@ const CreateProductForm = () => {
                     {errors.is_hidden && <InputError message={errors.is_hidden.message} />}
                 </div>
 
+                <div className='space-y-1'>
+                    <Label>Has Colors?</Label>
+                    <Controller
+                        control={control}
+                        defaultValue={false}
+                        name="has_colors"
+                        // rules={{ required: { value: true, message: "This value is required." } }}
+                        render={({ field }) => (
+                            <Toggle
+                                enabled={field.value}
+                                setEnabled={field.onChange}
+                            />
+                        )}
+                    />
+                    {errors.has_colors && <InputError message={errors.has_colors.message} />}
+                </div>
+
+                <div className='space-y-1'>
+                    <Label>Has Sizes</Label>
+                    <Controller
+                        control={control}
+                        defaultValue={false}
+                        name="has_sizes"
+                        // rules={{ required: { value: true, message: "This value is required." } }}
+                        render={({ field }) => (
+                            <Toggle
+                                enabled={field.value}
+                                setEnabled={field.onChange}
+                            />
+                        )}
+                    />
+                    {errors.has_sizes && <InputError message={errors.has_sizes.message} />}
+                </div>
+
             </div>
 
             <PrimaryButton type="submit" isLoading={isPending}>
@@ -145,4 +186,4 @@ const CreateProductForm = () => {
     )
 }
 
-export default CreateProductForm
+export default EditProductForm

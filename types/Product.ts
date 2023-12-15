@@ -16,6 +16,18 @@ export type Stock = {
     updated_at: string;
 };
 
+export type ProductImage<T = 'primary' | null> = {
+    id: number;
+    url: string;
+    type: T;
+    imageable_id: number;
+    imageable_type: string;
+    created_at: string;
+    updated_at: string;
+    full_url: string;
+    storage_path: string;
+}
+
 export interface Product {
     id: number;
     name: string;
@@ -23,6 +35,7 @@ export interface Product {
     category_id: number;
     description: string;
     price: string;
+    sales_price: string | null;
     SKU: string;
     is_hidden: boolean;
     is_featured: boolean;
@@ -34,16 +47,6 @@ export interface Product {
     updated_at: string;
     stocks: Stock[]; // Adjust type as per the stocks structure
     category: Category;
-    primary_image: {
-        id: number;
-        url: string;
-        type: string;
-        imageable_id: number;
-        imageable_type: string;
-        created_at: string;
-        updated_at: string;
-        full_url: string;
-        storage_path: string;
-    };
+    primary_image: ProductImage<"primary">;
 }
 

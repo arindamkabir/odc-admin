@@ -5,6 +5,7 @@ import { UseFormSetError } from "react-hook-form";
 import { ErrorResponse } from "@/types/Error"
 import { Order } from "@/types/Order";
 import { Stock } from "@/types/Product";
+import { toast } from "react-toastify";
 
 export type StoreOrderRequest = {
     f_name: string,
@@ -38,11 +39,14 @@ export const useStoreOrder = (setError: UseFormSetError<StoreOrderRequest>, onSu
     return useMutation<any, AxiosError<ErrorResponse>, StoreOrderRequest>({
         mutationFn: storeOrder,
         onSuccess: (res) => {
-            // router.push('dashboard');
-            queryClient.invalidateQueries({ queryKey: ['orders', 'products', 'infiniteProducts'] })
+            queryClient.invalidateQueries({ queryKey: ['orders', 'list'] });
+            queryClient.invalidateQueries({ queryKey: ['products', 'list'] });
+            queryClient.invalidateQueries({ queryKey: ['infiniteProducts', 'list'] });
+            toast.success('Order placed.');
             onSuccess();
         },
         onError: (err) => {
+            toast.error('Something went wrong.');
         }
     });
 }

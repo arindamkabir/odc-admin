@@ -2,10 +2,10 @@ import { StoreSizeRequest, useStoreSize } from '@/hooks/mutations/size/useStoreS
 import useStore from '@/store/store';
 import React from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import Label from '../common/form/Label';
-import Input from '../common/form/Input';
-import InputError from '../common/form/InputError';
-import PrimaryButton from '../common/buttons/PrimaryButton';
+import Label from '../../common/form/Label';
+import Input from '../../common/form/Input';
+import InputError from '../../common/form/InputError';
+import PrimaryButton from '../../common/buttons/PrimaryButton';
 
 const CreateSizeForm = () => {
     const showCreateSizeDrawer = useStore(state => state.showCreateSizeDrawer);

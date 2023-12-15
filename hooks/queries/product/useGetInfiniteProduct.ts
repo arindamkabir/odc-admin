@@ -17,7 +17,7 @@ const fetchProductList: QueryFunction<ProductListResponse, QueryKey, unknown> = 
 
 export const useGetProductInfiniteList = () => {
     return useInfiniteQuery<ProductListResponse, Error>({
-        queryKey: ['infiniteProducts'],
+        queryKey: ['infiniteProducts', 'list'],
         queryFn: fetchProductList,
         initialPageParam: undefined,
         getNextPageParam: (lastPage, pages) => lastPage.next_cursor,

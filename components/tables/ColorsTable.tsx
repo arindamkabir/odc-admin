@@ -10,6 +10,8 @@ import useStore from '@/store/store'
 import Pagination from '../common/pagination/Pagination'
 import { formatISOString } from '@/utils/dateTime'
 import { useGetColorList } from '@/hooks/queries/color/useGetColorLists'
+import TableEmpty from '../common/table/TableEmpty'
+import TableRowSkeleton from '../common/table/TableSkeleton'
 
 const ColorsTable = () => {
     const colorListQueryParams = useStore(state => state.colorListQueryParams);
@@ -17,7 +19,7 @@ const ColorsTable = () => {
     const showEditColorDrawer = useStore(state => state.showEditColorDrawer);
     const setEditingColor = useStore(state => state.setEditingColor);
 
-    const { data: colorListResponse, isPending } = useGetColorList(colorListQueryParams);
+    const { data: colorListResponse, isFetching } = useGetColorList(colorListQueryParams);
 
     return (
         <>
@@ -37,42 +39,49 @@ const ColorsTable = () => {
                     </Tr>
                 </THead>
                 <TBody>
-                    {
-                        colorListResponse?.data.map(color =>
-                            <Tr key={`color-table-${color.slug}-${color.id}`}>
-                                <Th>
-                                    <label>
-                                        <input type="checkbox" className="checkbox" />
-                                    </label>
-                                </Th>
-                                <Td>{color.name}</Td>
-                                <Td>
-                                    <div className='h-6 w-6 rounded-md' style={{ backgroundColor: color.hex_code }}>
+                    {isFetching || !colorListResponse ?
+                        <TableRowSkeleton />
+                        :
+                        colorListResponse.data.length > 0 ?
+                            colorListResponse?.data.map(color =>
+                                <Tr key={`color-table-${color.slug}-${color.id}`}>
+                                    <Th>
+                                        <label>
+                                            <input type="checkbox" className="checkbox" />
+                                        </label>
+                                    </Th>
+                                    <Td>{color.name}</Td>
+                                    <Td>
+                                        <div className='h-6 w-6 rounded-md' style={{ backgroundColor: color.hex_code }}>
 
-                                    </div>
-                                </Td>
-                                {/* <Td>{color.products_count}</Td> */}
-                                <Td>{color?.updated_at ? formatISOString(color.updated_at, "PP") : '-'}</Td>
-                                <Td className='flex items-center space-x-3'>
-                                    <button
-                                        className="btn btn-ghost btn-xs"
-                                        onClick={() => {
-                                            setEditingColor(color);
-                                            showEditColorDrawer(true);
-                                        }}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className="btn btn-ghost btn-xs"
-                                        onClick={() => {
-                                        }}
-                                    >
-                                        Delete
-                                    </button>
-                                </Td>
-                            </Tr>
-                        )}
+                                        </div>
+                                    </Td>
+                                    {/* <Td>{color.products_count}</Td> */}
+                                    <Td>{color?.updated_at ? formatISOString(color.updated_at, "PP") : '-'}</Td>
+                                    <Td className='flex items-center space-x-3'>
+                                        <button
+                                            className="btn btn-ghost btn-xs"
+                                            onClick={() => {
+                                                setEditingColor(color);
+                                                showEditColorDrawer(true);
+                                            }}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="btn btn-ghost btn-xs"
+                                            onClick={() => {
+                                            }}
+                                        >
+                                            Delete
+                                        </button>
+                                    </Td>
+                                </Tr>
+                            )
+
+                            :
+                            <TableEmpty />
+                    }
                 </TBody>
                 <TFoot>
                     <Tr>
