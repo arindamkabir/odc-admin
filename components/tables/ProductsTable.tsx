@@ -20,7 +20,7 @@ const ProductsTable = () => {
 
     const { data: productListResponse, isFetching } = useGetProductList(productListQueryParams);
 
-    console.log(productListResponse)
+    console.log('blah test')
 
     return (
         <>
