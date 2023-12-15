@@ -20,7 +20,7 @@ const ProductsTable = () => {
 
     const { data: productListResponse, isFetching } = useGetProductList(productListQueryParams);
 
-    console.log('blah test')
+    console.log(process.env.NEXT_PUBLIC_APP_ORIGIN)
 
     return (
         <>
