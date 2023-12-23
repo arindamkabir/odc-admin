@@ -59,7 +59,7 @@ const OrderProductListDrawer = () => {
                                     <li className="flex py-6" key={`order-product-${product.slug}`}>
                                         <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                             <img
-                                                src={product.primary_image.full_url}
+                                                src={product.primary_image?.full_url}
                                                 alt={product.name}
                                                 className="h-full w-full object-cover object-center"
                                             />

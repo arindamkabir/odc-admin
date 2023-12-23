@@ -22,6 +22,6 @@ export const useGetOrderList = (params: OrderListRequest) => {
         queryKey: ['orders', 'list', params],
         queryFn: () => {
             return fetchOrderList(params);
-        }
+        },
     });
 };

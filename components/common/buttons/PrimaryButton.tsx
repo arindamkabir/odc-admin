@@ -5,7 +5,7 @@ import Button from "../Button";
 const PrimaryButton = ({ type = "button", className = "", children, isLoading, ...props }: ButtonProps) => (
     <Button
         type={type}
-        className={`btn btn-primary ${className}`}
+        className={`btn btn-neutral ${className}`}
         {...props}
     >
         {isLoading ? <span className="loading loading-spinner"></span> : null}

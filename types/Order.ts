@@ -1,6 +1,14 @@
+import { Color } from "./Color";
 import { Product, Stock } from "./Product";
+import { Size } from "./Size";
 
-type OrderItem = {
+export type OrderDeliveryLocation = 'dhaka' | 'outside_dhaka' | 'outside_bd';
+
+export type OrderStatus = 'placed' | 'paid' | 'shipped' | 'delivered' | 'cancelled' | 'returned';
+
+export type OrderPlatform = 'website' | 'app' | 'facebook' | 'instagram' | 'tiktok' | 'youtube';
+
+export type OrderItem = {
     id: number;
     order_id: number;
     stock_id: number;
@@ -10,18 +18,13 @@ type OrderItem = {
     updated_at: string;
 }
 
-type OrderItemWProduct = {
-    id: number;
-    order_id: number;
-    stock_id: number;
-    price: string;
-    quantity: number;
-    product: Product;
-    created_at: string;
-    updated_at: string;
-}
+export type OrderItemWProduct = OrderItem & { product: Product };
 
-type Address = {
+export type OrderItemWStockProduct = OrderItem & {
+    stock: Stock & { product: Product }
+};
+
+export type OrderAddress = {
     id: number;
     order_id: number;
     type: string;
@@ -36,6 +39,7 @@ type Address = {
     country: string;
     zip_code: string;
     company: string;
+    full_address: string;
     created_at: string | null;
     updated_at: string | null;
 }
@@ -54,48 +58,31 @@ export type Order = {
     coupon_id: number | null;
     subtotal: string;
     discount: string;
+    shipping_cost: string;
     tax: string;
     total: string;
     is_billing_different: number;
-    shipping: Address;
     shipped_date: string | null;
     delivered_date: string | null;
     cancellation_date: string | null;
     return_date: string | null;
     return_reason: string | null;
-    status: string;
+    delivery_location: OrderDeliveryLocation;
+    status: OrderStatus;
+    platform: OrderPlatform;
     created_at: string;
     updated_at: string;
     status_color: string;
     status_for_humans: string;
     customer: Customer | null;
+    shipping: OrderAddress | null;
     order_items: OrderItem[];
     transaction: Transaction;
 }
 
-export type OrderWProduct = {
-    id: number;
-    customer_id: number;
-    coupon_id: number | null;
-    subtotal: string;
-    discount: string;
-    tax: string;
-    total: string;
-    is_billing_different: number;
-    shipped_date: string | null;
-    delivered_date: string | null;
-    cancellation_date: string | null;
-    return_date: string | null;
-    return_reason: string | null;
-    status: string;
-    created_at: string;
-    updated_at: string;
-    status_color: string;
-    status_for_humans: string;
-    customer: Customer | null;
-    order_items: OrderItemWProduct[];
-    transaction: Transaction;
-}
+export type OrderWProduct = Omit<Order, 'order_items'> & { order_items: OrderItemWProduct[] };
+
+export type OrderWProductAndBilling = Omit<Order, 'order_items'> & { order_items: OrderItemWStockProduct[], billing: OrderAddress | null };
 
 export type SavingOrderProduct = {
     id: number;
