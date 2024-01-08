@@ -12,7 +12,6 @@ import PrimaryButton from '../../common/buttons/PrimaryButton';
 
 
 const CreateCategoryForm = () => {
-    const showingCreateCategoryDrawer = useStore(state => state.showingCreateCategoryDrawer);
     const setShowingCreateCategoryDrawer = useStore(state => state.setShowingCreateCategoryDrawer);
 
     const { register, handleSubmit, control, watch, formState: { errors }, setValue, setError } = useForm<StoreCategoryRequest>({});
