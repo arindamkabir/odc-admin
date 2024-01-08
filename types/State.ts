@@ -8,6 +8,8 @@ import { Size } from "./Size";
 import { OrderListRequest } from "@/hooks/queries/order/useGetOrderList";
 import { Product, Stock } from "./Product";
 import { SavingOrderProduct } from "./Order";
+import { Coupon } from "./Coupon";
+import { CouponListRequest } from "@/hooks/queries/coupon/useGetCouponList";
 
 export type ProductState = {
     showingCreateProductDrawer: boolean,
@@ -77,4 +79,15 @@ export type OrderState = {
     setSelectedOrderProduct: (product: Product | null) => void
 }
 
-export type BoundedState = ProductState & CategoryState & ColorState & SizeState & OrderState;
+export type CouponState = {
+    showingCreateCouponDrawer: boolean,
+    showingEditCouponDrawer: boolean,
+    couponListQueryParams: CouponListRequest,
+    editingCoupon: Coupon | null,
+    setCouponListQueryParams: (params: CouponListRequest) => void,
+    showCreateCouponDrawer: (value: boolean) => void,
+    showEditCouponDrawer: (value: boolean) => void,
+    setEditingCoupon: (params: Coupon) => void,
+}
+
+export type BoundedState = ProductState & CategoryState & ColorState & SizeState & OrderState & CouponState;
