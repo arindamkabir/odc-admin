@@ -1,9 +1,6 @@
 import Card from '@/components/common/Card'
-import DashboardLoader from '@/components/common/DashboardLoader'
 import PageLoader from '@/components/common/PageLoader'
-import PrimaryButton from '@/components/common/buttons/PrimaryButton'
 import DashboardLayout from '@/components/layouts/DashboardLayout'
-import CustomerDetailsCard from '@/components/order/CustomerDetailsCard'
 import PaymentDetailsCard from '@/components/order/PaymentDetailsCard'
 import ProductListCard from '@/components/order/ProductListCard'
 import ShippingBillingCard from '@/components/order/ShippingBillingCard'
@@ -15,7 +12,6 @@ import React, { useMemo } from 'react'
 const OrderPage = () => {
     const router = useRouter();
     const { id } = router.query;
-
     const orderId = useMemo(() => (Array.isArray(id)) ? id[0] : id, [id]);
 
     const { data, isFetching } = useGetOrderDetail(orderId);
