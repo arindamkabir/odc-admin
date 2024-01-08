@@ -9,7 +9,7 @@ export type Coupon = {
     redemptions: number,
     expiry_date: string,
     created_at: string,
-    updated_at: string | number,
+    updated_at: string | null,
 }
 
 export type CouponWithOrderCount = Coupon & {

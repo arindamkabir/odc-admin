@@ -14,10 +14,10 @@ const createCouponSlice: StateCreator<
         search: ''
     },
     editingCoupon: null,
-    setShowingCreateCouponDrawer: (val) => {
+    showCreateCouponDrawer: (val) => {
         set(state => ({ showingCreateCouponDrawer: val }));
     },
-    setShowingEditCouponDrawer: (val) => {
+    showEditCouponDrawer: (val) => {
         set(state => ({ showingEditCouponDrawer: val }));
     },
     setCouponListQueryParams: (val) => {

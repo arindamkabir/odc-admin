@@ -5,6 +5,7 @@ import createCategorySlice from "./slices/categorySlice";
 import createSizeSlice from "./slices/sizeSlice";
 import createColorSlice from "./slices/colorSlice";
 import createOrderSlice from "./slices/orderSlice";
+import createCouponSlice from "./slices/couponSlice";
 
 const useStore = create<BoundedState>()((...a) => ({
     ...createProductSlice(...a),
@@ -12,6 +13,7 @@ const useStore = create<BoundedState>()((...a) => ({
     ...createSizeSlice(...a),
     ...createColorSlice(...a),
     ...createOrderSlice(...a),
+    ...createCouponSlice(...a),
 }));
 
 export default useStore;
